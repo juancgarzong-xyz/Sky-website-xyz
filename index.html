@@ -1,0 +1,993 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Skyrock Studio · Mezcla, Postproducción de Audio y Video Podcast en Bogotá</title>
+  <link rel="icon" type="image/png" href="assets/logo-white.png" />
+  <link rel="apple-touch-icon" href="assets/logo-white.png" />
+  <meta name="description" content="Skyrock Studio es un estudio creativo en Bogotá especializado en mezcla, postproducción de audio y producción de contenido audiovisual. Con experiencia en largometrajes, series y cortometrajes colombianos, acompañamos a artistas, directores, productores y equipos audiovisuales a transformar ideas en una identidad sonora." />
+  <meta name="keywords" content="estudio de grabación Bogotá, mezcla y mastering, postproducción de audio, video podcast Bogotá, sound design, rock indie pop, Skyrock Studio" />
+  <meta property="og:title" content="Skyrock Studio · Audio que transforma ideas en experiencias" />
+  <meta property="og:description" content="Estudio creativo en Bogotá especializado en mezcla, postproducción de audio y producción de contenido audiovisual para largometrajes, series y artistas colombianos." />
+  <meta property="og:type" content="website" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <!-- Non-blocking font load: media trick + onload swap -->
+  <link rel="preload" href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,400;0,700;0,800;0,900;1,300;1,700&family=JetBrains+Mono:wght@400;500&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'" />
+  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,400;0,700;0,800;0,900;1,300;1,700&family=JetBrains+Mono:wght@400;500&display=swap" /></noscript>
+  <style>
+    @font-face { font-display: swap; }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --background: #ffffff;
+      --surface: #f4f4f4;
+      --surface-2: #e8e8e8;
+      --foreground: #0a0a0a;
+      --warm-white: #ffffff;
+      --muted-foreground: #666666;
+      --accent: #198d99;
+      --accent-accessible: #0c6570; /* darkened for AA contrast on white */
+      --accent-foreground: #ffffff;
+      --accent-soft: rgba(25,141,153,0.10);
+      --border: rgba(10,10,10,0.10);
+      --font-sans: 'Montserrat', system-ui, sans-serif;
+      --font-mono: 'JetBrains Mono', ui-monospace, monospace;
+      --shadow-glow-accent: 0 10px 40px -12px rgba(25,141,153,0.45);
+    }
+
+    html { scroll-behavior: smooth; background-color: var(--background); }
+
+    body {
+      font-family: var(--font-sans);
+      background-color: var(--background);
+      color: var(--foreground);
+      -webkit-font-smoothing: antialiased;
+      text-rendering: optimizeLegibility;
+      overflow-x: hidden;
+    }
+
+    ::selection { background-color: rgba(25,141,153,0.25); color: var(--foreground); }
+    :focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+    a { text-decoration: none; color: inherit; }
+    img { display: block; max-width: 100%; }
+
+    /* ---- Utilities ---- */
+    .reveal {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.8s cubic-bezier(0.16,1,0.3,1), transform 0.8s cubic-bezier(0.16,1,0.3,1);
+    }
+    .reveal.is-visible { opacity: 1; transform: translateY(0); }
+    @media (prefers-reduced-motion: reduce) { .reveal { opacity: 1; transform: none; transition: none; } }
+
+    .font-mono { font-family: var(--font-mono); }
+    .text-accent { color: var(--accent); }
+    .text-muted { color: var(--muted-foreground); }
+
+    /* ---- NAV ---- */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 50;
+      transition: all 0.5s;
+      color: white;
+    }
+    nav.scrolled {
+      background: rgba(255,255,255,0.95);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(10,10,10,0.08);
+      color: var(--foreground);
+    }
+    .nav-inner {
+      max-width: 1280px; margin: 0 auto; padding: 0 2.5rem;
+      height: 80px;
+      display: grid; grid-template-columns: auto 1fr auto; align-items: center; gap: 1.5rem;
+    }
+    .hamburger { display: flex; flex-direction: column; gap: 5px; padding: 12px; margin-left: -12px; background: none; border: none; cursor: pointer; min-width: 44px; min-height: 44px; justify-content: center; }
+    .hamburger span { display: block; height: 1px; background: currentColor; transition: opacity 0.2s; }
+    .hamburger span:nth-child(1) { width: 28px; }
+    .hamburger span:nth-child(2) { width: 28px; }
+    .hamburger span:nth-child(3) { width: 20px; margin-left: auto; }
+    .hamburger:hover { opacity: 0.7; }
+    .nav-brand {
+      justify-self: center;
+      transition: opacity 0.5s;
+      display: flex; align-items: center;
+    }
+    .nav-brand img { height: 44px; width: auto; display: block; }
+    .nav-logo-white { display: block; }
+    .nav-logo-black { display: none; }
+    nav.scrolled .nav-logo-white { display: none; }
+    nav.scrolled .nav-logo-black { display: block; }
+    nav:not(.scrolled) .nav-brand { opacity: 0; pointer-events: none; }
+    .nav-links {
+      display: flex; align-items: center; gap: 2rem;
+      font-size: 10px; text-transform: uppercase; letter-spacing: 0.3em; font-weight: 500;
+    }
+    .nav-anchors { display: none; align-items: center; gap: 1.75rem; opacity: 0.8; }
+    .nav-anchors a:hover { opacity: 1; }
+    .nav-lang { display: flex; align-items: center; gap: 8px; font-family: var(--font-mono); }
+    @media (min-width: 768px) { .nav-anchors { display: flex; } }
+
+    /* ---- HERO ---- */
+    .hero {
+      min-height: 100dvh; display: flex; flex-direction: column;
+      padding: 0 2.5rem; position: relative; overflow: hidden;
+      background-color: #000000;
+      color: #ffffff;
+    }
+    .hero-bg {
+      position: absolute; inset: 0; z-index: 0; pointer-events: none;
+    }
+    .hero-vignette {
+      position: absolute; inset: 0;
+      background: radial-gradient(ellipse at center, transparent 30%, rgba(0,0,0,0.7) 100%);
+    }
+    .grid-lines {
+      position: absolute; inset: 0; opacity: 0.15;
+      background-image: linear-gradient(to right, rgba(255,255,255,0.15) 1px, transparent 1px);
+      background-size: 96px 100%;
+    }
+    .film-grain::after {
+      content: ''; position: absolute; inset: 0; pointer-events: none;
+      opacity: 0.08; mix-blend-mode: overlay;
+      background-image: url("data:image/svg+xml;utf8,<svg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%' height='100%' filter='url(%23n)' opacity='0.7'/></svg>");
+    }
+    .hero-content {
+      position: relative; z-index: 10; flex: 1;
+      display: flex; flex-direction: column; justify-content: flex-end;
+      padding-bottom: 6rem; padding-top: 10rem;
+      max-width: 1280px; margin: 0 auto; width: 100%;
+    }
+    .hero-badge { display: flex; align-items: center; gap: 12px; margin-bottom: 2.5rem; }
+    .wave-bars { display: flex; align-items: flex-end; gap: 3px; height: 16px; }
+    .wave-bar {
+      width: 2px; height: 100%; background: var(--accent);
+      transform-origin: center; animation: wave 1.4s ease-in-out infinite;
+    }
+    @keyframes wave { 0%,100% { transform: scaleY(0.3); } 50% { transform: scaleY(1); } }
+    .hero-badge-text { font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.45em; text-transform: uppercase; color: var(--accent); }
+    .hero-wordmark {
+      font-size: clamp(3rem, 10vw, 9rem);
+      font-weight: 800; text-transform: uppercase;
+      line-height: 1; letter-spacing: -0.04em; color: var(--warm-white);
+      animation: slow-fade-in 1.8s cubic-bezier(0.16,1,0.3,1) both;
+    }
+    .hero-logo {
+      width: clamp(220px, 30vw, 420px); height: auto;
+      animation: slow-fade-in-logo 1.8s cubic-bezier(0.16,1,0.3,1) both;
+      flex-shrink: 0;
+    }
+    .hero-brand {
+      display: flex; flex-wrap: wrap; align-items: center; gap: clamp(1rem, 3vw, 2.5rem);
+      margin-bottom: 0.5rem;
+    }
+    @keyframes slow-fade-in-logo { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: translateY(0); } }
+    @keyframes slow-fade-in { from { opacity: 0; letter-spacing: 0.05em; } to { opacity: 1; letter-spacing: -0.04em; } }
+    .hero-sub {
+      font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.3em;
+      text-transform: uppercase; color: var(--muted-foreground); margin-top: 1.5rem; margin-bottom: 3rem;
+    }
+    .hero-sub .dot { color: var(--accent); }
+    .hero-grid { display: grid; gap: 2.5rem; align-items: flex-end; max-width: 1000px; }
+    @media (min-width: 768px) { .hero-grid { grid-template-columns: 1.2fr auto; gap: 4rem; } }
+    .hero-desc { font-size: 1.05rem; color: var(--muted-foreground); max-width: 36rem; line-height: 1.7; }
+    .hero-ctas { display: flex; flex-wrap: wrap; gap: 1rem; }
+    .hero-strip {
+      position: relative; z-index: 10;
+      border-top: 1px solid rgba(255,255,255,0.12);
+      padding: 1.5rem 0; max-width: 1280px; margin: 0 auto; width: 100%;
+    }
+    .hero-strip-inner {
+      display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between;
+      gap: 1.5rem; font-size: 10px; text-transform: uppercase; letter-spacing: 0.4em;
+      color: rgba(255,255,255,0.45); font-family: var(--font-mono);
+    }
+    .hero-strip-credits { display: flex; align-items: center; gap: 1.5rem; opacity: 0.6; text-align: right; }
+
+    /* ---- BUTTONS ---- */
+    .btn-primary {
+      display: inline-flex; align-items: center; justify-content: center;
+      border-radius: 6px; background: #ffffff;
+      padding: 14px 28px; font-size: 13px; font-weight: 600; letter-spacing: -0.01em;
+      color: #0a0a0a; border: none; cursor: pointer; transition: all 0.2s;
+      min-height: 44px;
+    }
+    .btn-primary:hover { background: var(--accent); color: #ffffff; box-shadow: var(--shadow-glow-accent); }
+    .btn-ghost {
+      display: inline-flex; align-items: center; justify-content: center;
+      border-radius: 6px; background: transparent;
+      padding: 14px 28px; font-size: 13px; font-weight: 600; letter-spacing: -0.01em;
+      color: white; border: 1px solid rgba(255,255,255,0.35); cursor: pointer; transition: all 0.2s;
+      min-height: 44px;
+    }
+    .btn-ghost:hover { border-color: var(--accent); color: var(--accent); }
+
+    /* ---- SECTION COMMON ---- */
+    .section-label {
+      font-family: var(--font-mono); font-size: 10px; text-transform: uppercase;
+      letter-spacing: 0.4em; color: var(--accent-accessible);
+    }
+    .section-title {
+      font-size: clamp(2.2rem, 5vw, 4rem); font-weight: 800;
+      letter-spacing: -0.04em; line-height: 0.95; margin-top: 1.25rem;
+    }
+    .italic-accent { font-style: italic; font-weight: 300; color: var(--accent); }
+    .container { max-width: 1280px; margin: 0 auto; }
+    .px-section { padding-left: 2.5rem; padding-right: 2.5rem; }
+    @media (min-width: 1024px) { .px-section { padding-left: 6rem; padding-right: 6rem; } }
+
+    /* ---- SERVICES ---- */
+    #servicios { padding: 8rem 2.5rem; background: var(--background); }
+    @media (min-width: 1024px) { #servicios { padding: 8rem 6rem; } }
+    .services-header {
+      display: flex; flex-direction: column; gap: 2rem;
+      margin-bottom: 5rem;
+    }
+    @media (min-width: 768px) {
+      .services-header { flex-direction: row; align-items: flex-end; justify-content: space-between; }
+    }
+    .services-grid {
+      display: grid; gap: 1px; background: var(--border);
+    }
+    @media (min-width: 768px) { .services-grid { grid-template-columns: repeat(3, 1fr); } }
+    .service-card {
+      background: var(--background); padding: 2.5rem 3rem;
+      display: flex; flex-direction: column; transition: background 0.5s; cursor: default;
+    }
+    .service-card:hover { background: var(--surface); }
+    .service-top { display: flex; align-items: center; justify-content: space-between; margin-bottom: 2.5rem; }
+    .service-index { font-family: var(--font-mono); font-size: 10px; color: var(--accent); letter-spacing: 0.3em; }
+    .service-icon { width: 20px; height: 20px; color: var(--muted-foreground); transition: color 0.3s; }
+    .service-card:hover .service-icon { color: var(--accent); }
+    .service-title { font-size: 1.5rem; font-weight: 700; letter-spacing: -0.02em; margin-bottom: 1.5rem; white-space: pre-line; }
+    .service-list { list-style: none; flex: 1; margin-bottom: 3rem; }
+    .service-list li {
+      display: flex; align-items: flex-start; gap: 12px;
+      font-size: 14px; color: var(--muted-foreground); padding: 8px 0;
+      transition: color 0.2s; cursor: default;
+    }
+    .service-list li:hover { color: var(--foreground); }
+    .service-list li::before { content: ''; display: block; width: 12px; height: 1px; background: var(--accent); margin-top: 10px; flex-shrink: 0; }
+    .service-cta {
+      display: inline-flex; align-items: center; gap: 8px;
+      font-size: 11px; text-transform: uppercase; letter-spacing: 0.25em; font-weight: 700;
+      color: var(--foreground); transition: color 0.2s;
+    }
+    .service-card:hover .service-cta { color: var(--accent); }
+    .arrow-icon { width: 16px; height: 16px; }
+
+    /* ---- DIFFERENTIAL ---- */
+    #diferencial { padding: 8rem 2.5rem; background: var(--surface); position: relative; }
+    @media (min-width: 1024px) { #diferencial { padding: 8rem 6rem; } }
+    .diff-grid { display: grid; gap: 4rem; align-items: center; }
+    @media (min-width: 1024px) { .diff-grid { grid-template-columns: repeat(2, 1fr); gap: 6rem; } }
+    .pillars { display: grid; grid-template-columns: repeat(2, 1fr); gap: 2.5rem 2rem; margin-top: 3rem; }
+    .pillar-line { height: 1px; width: 48px; background: color-mix(in oklab, var(--accent) 40%, transparent); margin-bottom: 1.25rem; }
+    .pillar-icon { width: 20px; height: 20px; color: var(--accent); margin-bottom: 1rem; }
+    .pillar-title { font-weight: 700; letter-spacing: -0.01em; margin-bottom: 8px; font-size: 1.1rem; }
+    .pillar-desc { font-size: 14px; color: var(--muted-foreground); line-height: 1.6; }
+    .diff-image-wrap { position: relative; }
+    .diff-image-frame { position: relative; width: 100%; aspect-ratio: 4/5; overflow: hidden; border: 1px solid var(--border); box-shadow: 0 24px 80px -20px oklch(0 0 0 / 0.15); }
+    .diff-image-frame img { position: absolute; inset: 0; width: 100%; height: 120%; object-fit: cover; top: -10%; }
+    .diff-badge {
+      position: absolute; bottom: -24px; left: -24px;
+      background: var(--accent); padding: 2rem;
+      box-shadow: var(--shadow-glow-accent); display: none;
+    }
+    @media (min-width: 768px) { .diff-badge { display: block; } }
+    .diff-badge-num { color: var(--accent-foreground); font-size: 2.5rem; font-weight: 800; letter-spacing: -0.04em; line-height: 1; }
+    .diff-badge-label { color: var(--accent-foreground); font-size: 10px; text-transform: uppercase; font-weight: 700; letter-spacing: 0.2em; margin-top: 8px; }
+
+    /* ---- PORTFOLIO ---- */
+    #portafolio { padding: 8rem 2.5rem; background: var(--background); }
+    @media (min-width: 1024px) { #portafolio { padding: 8rem 6rem; } }
+    .portfolio-header { display: flex; flex-direction: column; gap: 2rem; margin-bottom: 4rem; }
+    @media (min-width: 768px) { .portfolio-header { flex-direction: row; align-items: flex-end; justify-content: space-between; } }
+    .portfolio-filters { display: flex; flex-wrap: wrap; gap: 1.5rem; font-size: 10px; text-transform: uppercase; letter-spacing: 0.25em; font-weight: 700; }
+    .filter-btn { background: none; border: none; border-bottom: 1px solid transparent; padding-bottom: 4px; cursor: pointer; color: var(--muted-foreground); transition: all 0.2s; font-family: var(--font-sans); font-size: 10px; text-transform: uppercase; letter-spacing: 0.25em; font-weight: 700; }
+    .filter-btn.active, .filter-btn:hover { color: var(--accent); border-bottom-color: var(--accent); }
+    .portfolio-grid { display: grid; gap: 2rem; }
+    @media (min-width: 768px) { .portfolio-grid { grid-template-columns: repeat(2, 1fr); } }
+    @media (min-width: 1024px) { .portfolio-grid { grid-template-columns: repeat(3, 1fr); gap: 3rem; } }
+    .project-card { cursor: pointer; }
+    .project-img-wrap { position: relative; overflow: hidden; border: 1px solid var(--border); margin-bottom: 1.25rem; }
+    .project-img-wrap img { width: 100%; aspect-ratio: 4/5; object-fit: cover; filter: grayscale(1); transition: filter 1s, transform 1s; display: block; }
+    .project-card:hover .project-img-wrap img { filter: grayscale(0); transform: scale(1.03); }
+    .project-overlay { position: absolute; inset: 0; background: linear-gradient(to top, rgba(0,0,0,0.7), transparent); opacity: 0.5; transition: opacity 0.5s; }
+    .project-card:hover .project-overlay { opacity: 0.3; }
+    .project-meta { display: flex; justify-content: space-between; align-items: flex-start; gap: 1rem; }
+    .project-cat { font-size: 10px; text-transform: uppercase; letter-spacing: 0.3em; color: var(--accent); margin-bottom: 8px; }
+    .project-title { font-size: 1.1rem; font-weight: 700; letter-spacing: -0.02em; margin-bottom: 4px; }
+    .project-result { font-size: 12px; color: var(--muted-foreground); }
+    .project-arrow { width: 20px; height: 20px; color: var(--accent); flex-shrink: 0; transition: transform 0.2s; }
+    .project-card:hover .project-arrow { transform: translate(4px, -4px); }
+
+    /* ---- PROCESS ---- */
+    #proceso { padding: 8rem 2.5rem; background: var(--surface); }
+    @media (min-width: 1024px) { #proceso { padding: 8rem 6rem; } }
+    .process-steps { display: grid; gap: 3rem; position: relative; margin-top: 5rem; }
+    @media (min-width: 768px) { .process-steps { grid-template-columns: repeat(4, 1fr); gap: 2rem; } }
+    .process-line { display: none; position: absolute; left: 0; right: 0; top: 7px; height: 1px; background: var(--border); }
+    @media (min-width: 768px) { .process-line { display: block; } }
+    .step-dot { width: 14px; height: 14px; border-radius: 50%; background: var(--accent); box-shadow: 0 0 0 4px color-mix(in oklab, var(--accent) 12%, transparent); position: relative; z-index: 1; margin-bottom: 2rem; }
+    .step-num { font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.3em; color: var(--accent); }
+    .step-title { font-size: 1.4rem; font-weight: 700; letter-spacing: -0.02em; margin: 12px 0 1rem; }
+    .step-desc { font-size: 14px; color: var(--muted-foreground); line-height: 1.6; }
+
+    /* ---- TESTIMONIALS ---- */
+    #testimonios { padding: 8rem 2.5rem; background: var(--background); }
+    @media (min-width: 1024px) { #testimonios { padding: 8rem 6rem; } }
+    .testimonials-grid { display: grid; gap: 2rem; margin-top: 5rem; }
+    @media (min-width: 768px) { .testimonials-grid { grid-template-columns: repeat(2, 1fr); gap: 3rem; } }
+    .testimonial {
+      background: var(--surface); border: 1px solid var(--border);
+      padding: 3.5rem; position: relative;
+    }
+    .testimonial-quote-mark {
+      position: absolute; top: 24px; left: 32px;
+      font-size: 4.5rem; font-style: italic; color: color-mix(in oklab, var(--accent) 30%, transparent);
+      line-height: 1; user-select: none; font-family: var(--font-sans); font-weight: 300;
+    }
+    .testimonial blockquote { font-size: 1.2rem; font-weight: 300; line-height: 1.7; margin-bottom: 2.5rem; position: relative; }
+    .testimonial-author { display: flex; align-items: center; gap: 1.25rem; }
+    .testimonial-avatar { width: 56px; height: 56px; border-radius: 50%; background: var(--surface-2, var(--surface)); border: 1px solid var(--border); flex-shrink: 0; }
+    .testimonial-name { font-weight: 700; font-size: 14px; letter-spacing: -0.01em; }
+    .testimonial-role { font-size: 11px; color: var(--muted-foreground); text-transform: uppercase; letter-spacing: 0.2em; margin-top: 4px; }
+
+    /* ---- STUDIO ---- */
+    #estudio { padding: 8rem 2.5rem; background: var(--surface); }
+    @media (min-width: 1024px) { #estudio { padding: 8rem 6rem; } }
+    .studio-image-wrap { position: relative; border: 1px solid var(--border); overflow: hidden; aspect-ratio: 16/10; margin-bottom: 4rem; }
+    .studio-image-wrap img { position: absolute; inset: 0; width: 100%; height: 125%; object-fit: cover; top: -12%; }
+    .studio-image-overlay { position: absolute; inset: 0; background: linear-gradient(to top, rgba(244,244,244,0.85), transparent); }
+    .studio-image-label { position: absolute; bottom: 2rem; left: 2rem; right: 2rem; display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: 1.5rem; }
+    .studio-blocks { display: grid; gap: 1px; background: var(--border); }
+    @media (min-width: 640px) { .studio-blocks { grid-template-columns: repeat(2, 1fr); } }
+    @media (min-width: 1024px) { .studio-blocks { grid-template-columns: repeat(4, 1fr); } }
+    .studio-block { background: var(--surface); padding: 2rem; transition: background 0.2s; }
+    .studio-block:hover { background: var(--surface-2, oklch(0.94 0.006 250)); }
+    .studio-block-icon { width: 24px; height: 24px; color: var(--accent); margin-bottom: 1.5rem; }
+    .studio-block-title { font-weight: 700; font-size: 1.1rem; letter-spacing: -0.01em; margin-bottom: 8px; }
+    .studio-block-desc { font-size: 14px; color: var(--muted-foreground); line-height: 1.6; }
+
+    /* ---- CONTACT ---- */
+    #contacto { padding: 8rem 2.5rem; background: var(--background); border-top: 1px solid var(--border); }
+    @media (min-width: 1024px) { #contacto { padding: 8rem 6rem; } }
+    .contact-grid { display: grid; gap: 4rem; }
+    @media (min-width: 1024px) { .contact-grid { grid-template-columns: repeat(2, 1fr); gap: 6rem; } }
+    .contact-info-list { list-style: none; margin-top: 3rem; }
+    .contact-info-list li { display: flex; align-items: center; gap: 1rem; margin-bottom: 1.25rem; }
+    .contact-icon-box { width: 40px; height: 40px; border: 1px solid color-mix(in oklab, var(--accent) 30%, transparent); display: flex; align-items: center; justify-content: center; color: var(--accent); flex-shrink: 0; }
+    .contact-icon-box svg { width: 16px; height: 16px; }
+    .contact-info-list li a:hover { color: var(--accent); }
+    .contact-form {
+      background: var(--surface); border: 1px solid var(--border); padding: 3rem;
+    }
+    .form-field { margin-bottom: 1.75rem; }
+    .form-label { font-size: 10px; text-transform: uppercase; letter-spacing: 0.25em; color: var(--accent); font-weight: 700; display: block; margin-bottom: 8px; }
+    .form-input, .form-select {
+      width: 100%; background: transparent; border: none; border-bottom: 1px solid var(--border);
+      padding: 12px 0; font-size: 14px; color: var(--foreground); outline: none;
+      font-family: var(--font-sans); transition: border-color 0.2s; appearance: none;
+    }
+    .form-input::placeholder { color: color-mix(in oklab, var(--muted-foreground) 40%, transparent); }
+    .form-input:focus, .form-select:focus { border-bottom-color: var(--accent); }
+    .form-row { display: grid; gap: 1.5rem; }
+    @media (min-width: 640px) { .form-row { grid-template-columns: repeat(2, 1fr); } }
+    .btn-submit {
+      width: 100%; border-radius: 6px; background: #0a0a0a; color: #ffffff;
+      padding: 1rem; font-weight: 600; font-size: 14px; letter-spacing: -0.01em;
+      border: none; cursor: pointer; transition: all 0.2s; font-family: var(--font-sans);
+    }
+    .btn-submit:hover { background: var(--accent); color: #ffffff; box-shadow: var(--shadow-glow-accent); }
+    .form-success { padding: 4rem; text-align: center; }
+    .form-success-icon { width: 40px; height: 40px; color: var(--accent); margin: 0 auto 1.5rem; }
+    .form-success h3 { font-size: 1.5rem; font-weight: 700; letter-spacing: -0.02em; margin-bottom: 12px; }
+    .form-success p { font-size: 14px; color: var(--muted-foreground); max-width: 260px; margin: 0 auto; }
+
+    /* ---- FOOTER ---- */
+    footer { background: var(--background); border-top: 1px solid var(--border); }
+    .footer-main { max-width: 1280px; margin: 0 auto; padding: 5rem 2.5rem; display: grid; gap: 3rem; }
+    @media (min-width: 768px) { .footer-main { grid-template-columns: 1.4fr 1fr 1fr 1fr; } }
+    @media (min-width: 1024px) { .footer-main { padding: 5rem 6rem; } }
+    .footer-brand { font-size: 1rem; font-weight: 800; text-transform: uppercase; letter-spacing: -0.02em; margin-bottom: 1.25rem; }
+    .footer-brand span { color: var(--accent); font-size: 12px; vertical-align: middle; margin-left: 6px; }
+    .footer-brand-desc { font-size: 14px; color: var(--muted-foreground); line-height: 1.6; max-width: 280px; }
+    .footer-col h3 { font-size: 10px; text-transform: uppercase; letter-spacing: 0.3em; color: var(--accent-accessible); font-weight: 700; margin-bottom: 1.25rem; }
+    .footer-col ul { list-style: none; }
+    .footer-col li { margin-bottom: 12px; font-size: 14px; color: var(--muted-foreground); }
+    .footer-col li a:hover { color: var(--accent); }
+    .footer-bottom { border-top: 1px solid var(--border); }
+    .footer-bottom-inner { max-width: 1280px; margin: 0 auto; padding: 2rem 2.5rem; display: flex; flex-direction: column; gap: 1rem; font-size: 10px; text-transform: uppercase; letter-spacing: 0.3em; color: var(--muted-foreground); font-family: var(--font-mono); }
+    @media (min-width: 768px) { .footer-bottom-inner { flex-direction: row; align-items: center; justify-content: space-between; } }
+    @media (min-width: 1024px) { .footer-bottom-inner { padding: 2rem 6rem; } }
+
+    /* SVG Icons inline */
+    svg { display: inline-block; }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<a href="#main-content" style="position:absolute;left:-9999px;top:auto;width:1px;height:1px;overflow:hidden;z-index:999;background:#198d99;color:#fff;padding:8px 16px;font-weight:700;" onfocus="this.style.left='0';this.style.width='auto';this.style.height='auto'" onblur="this.style.left='-9999px';this.style.width='1px';this.style.height='1px'">Saltar al contenido principal</a>
+<nav id="main-nav" aria-label="Navegación principal">
+  <div class="nav-inner">
+    <button class="hamburger" aria-label="Abrir menú de navegación" aria-expanded="false" aria-controls="nav-anchors">
+      <span></span><span></span><span></span>
+    </button>
+    <a href="#top" class="nav-brand">
+      <picture><source srcset="assets/logo-white.webp" type="image/webp" /><img src="assets/logo-white.png" alt="Skyrock Studio" class="nav-logo-white" /></picture>
+      <picture><source srcset="assets/logo-black.webp" type="image/webp" /><img src="assets/logo-black.png" alt="Skyrock Studio" class="nav-logo-black" /></picture>
+    </a>
+    <div class="nav-links">
+      <div class="nav-anchors">
+        <a href="#servicios">Servicios</a>
+        <a href="#portafolio">Portafolio</a>
+        <a href="#contacto">Contacto</a>
+      </div>
+      <span class="nav-lang font-mono">
+        <span>ESP</span>
+        <span style="opacity:0.4">·</span>
+        <span style="opacity:0.4">ENG</span>
+      </span>
+    </div>
+  </div>
+</nav>
+
+<main id="main-content">
+<!-- HERO -->
+<section id="top" class="hero film-grain">
+  <div class="hero-bg">
+    <div class="hero-vignette"></div>
+    <div class="grid-lines" aria-hidden="true"></div>
+  </div>
+  <div class="hero-content">
+    <div class="hero-badge">
+      <div class="wave-bars" aria-hidden="true">
+        <div class="wave-bar" style="animation-delay:0s"></div>
+        <div class="wave-bar" style="animation-delay:0.15s"></div>
+        <div class="wave-bar" style="animation-delay:0.3s"></div>
+        <div class="wave-bar" style="animation-delay:0.45s"></div>
+        <div class="wave-bar" style="animation-delay:0.6s"></div>
+      </div>
+      <span class="hero-badge-text">BOGOTÁ · COLOMBIA · SINCE 2015</span>
+    </div>
+    <div class="hero-brand">
+      <h1 class="hero-wordmark" fetchpriority="high">SKY-ROCK</h1>
+      <picture><source srcset="assets/logo-white.webp" type="image/webp" /><img src="assets/logo-white.png" alt="Sky Rock — Music · Film · Content" class="hero-logo" width="640" height="493" /></picture>
+    </div>
+    <p class="hero-sub">
+      Sound Design <span class="dot">·</span> Mix &amp; Master <span class="dot">·</span> Video Podcast
+    </p>
+    <div class="hero-grid">
+      <p class="hero-desc">
+        Skyrock Studio es un estudio creativo en Bogotá especializado en mezcla, postproducción de audio y producción de contenido audiovisual. Con experiencia en largometrajes, series y cortometrajes colombianos, acompañamos a artistas, directores, productores y equipos audiovisuales a transformar ideas en una identidad sonora.
+      </p>
+      <div class="hero-ctas">
+        <a href="#contacto" aria-label="Agendar reunión — ir al formulario de contacto"><button class="btn-primary">Agendar reunión</button></a>
+        <a href="#servicios"><button class="btn-ghost">Ver servicios</button></a>
+      </div>
+    </div>
+  </div>
+  <div class="hero-strip">
+    <div class="hero-strip-inner">
+      <span style="color:rgba(255,255,255,0.85); white-space:pre-line">JUAN C. GARZÓN - CRÉDITOS EN CINE · SERIES · PODCASTS&#10;@JUANCA_GARZON</span>
+      <div class="hero-strip-credits">
+        <span style="white-space:pre-line;text-align:right">PERROS DE NIEBLA&#10;&#10;CHICAMOCHA FILMS&#10;CO-PRODUCCIÓN DE&#10;CANCION ORIGINAL&#10;MIX FILM-SCORE</span>
+        <span>·</span>
+        <span style="white-space:pre-line;text-align:right">ME LATE QUE SÍ&#10;NETFLIX&#10;&#10;ASISTENTE DE&#10;INGENIERIA&#10;Y PRODUCCION&#10;MÚSICA-SIMÓN MEJÍA</span>
+        <span>·</span>
+        <span style="white-space:pre-line;text-align:right">ALIX&#10;&#10;ASISTENTE DE&#10;INGENIERIA&#10;Y PRODUCCION DE&#10;MÚSICA-SIMÓN MEJÍA&#10;AMAZON PRIME</span>
+        <span>·</span>
+        <span style="white-space:pre-line;text-align:right">OASIS&#10;&#10;DOME&#10;SOUND DESIGN&#10;7.1 MIX&#10;MIX FILMSCORE&#10;CARLOS DUDLEY</span>
+      </div>
+      <span style="color:var(--accent)">↓ Scroll</span>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section id="servicios">
+  <div class="container">
+    <header class="services-header reveal">
+      <div style="max-width:36rem">
+        <span class="section-label">Qué hacemos</span>
+        <h2 class="section-title">Excelencia técnica para cada <span class="italic-accent">etapa del sonido</span>.</h2>
+      </div>
+      <p style="font-size:14px;color:var(--muted-foreground);max-width:280px;line-height:1.6">
+        Tres flujos de trabajo. Un solo estándar: el de los proyectos que quieres ver firmados con tu nombre.
+      </p>
+    </header>
+    <div class="services-grid">
+      <!-- Service 01 -->
+      <article class="service-card reveal">
+        <div class="service-top">
+          <span class="service-index">01 — EXPERIENCES</span>
+          <svg class="service-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 13.5l10.5-11.25L12 10.5h8.25L9.75 21.75 12 13.5H3.75z"/></svg>
+        </div>
+        <h3 class="service-title">Creative&#10;Experiences</h3>
+        <ul class="service-list">
+          <li>Live performance &amp; dirección escénica</li>
+          <li>Visuales en vivo &amp; video mapping</li>
+          <li>Diseño de iluminación</li>
+          <li>Instalaciones interactivas &amp; multicanal</li>
+          <li>Grabación multicámara &amp; streaming</li>
+        </ul>
+        <a href="servicios/creative-experiences.html" class="service-cta">
+          CREATIVE EXPERIENCES ↗
+          <svg class="arrow-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 19.5l15-15m0 0H8.25m11.25 0v11.25"/></svg>
+        </a>
+      </article>
+      <!-- Service 02 -->
+      <article class="service-card reveal">
+        <div class="service-top">
+          <span class="service-index">02 — AUDIOVISUAL</span>
+          <svg class="service-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M7.5 3.75H6A2.25 2.25 0 003.75 6v1.5M16.5 3.75H18A2.25 2.25 0 0120.25 6v1.5m0 9V18A2.25 2.25 0 0118 20.25h-1.5m-9 0H6A2.25 2.25 0 013.75 18v-1.5M15 12a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+        </div>
+        <h3 class="service-title">Postproducción AudioVisual</h3>
+        <ul class="service-list">
+          <li>Re-recording mix</li>
+          <li>Diseño sonoro para cine</li>
+          <li>Limpieza de diálogos</li>
+          <li>Entregables 5.1 / Atmos</li>
+        </ul>
+        <a href="servicios/audio-cine.html" class="service-cta">
+          VER POSTPRODUCCIÓN
+          <svg class="arrow-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 19.5l15-15m0 0H8.25m11.25 0v11.25"/></svg>
+        </a>
+      </article>
+      <!-- Service 03 -->
+      <article class="service-card reveal">
+        <div class="service-top">
+          <span class="service-index">03 — CONTENIDO</span>
+          <svg class="service-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 10.5l4.72-4.72a.75.75 0 011.28.53v11.38a.75.75 0 01-1.28.53l-4.72-4.72M4.5 18.75h9a2.25 2.25 0 002.25-2.25v-9a2.25 2.25 0 00-2.25-2.25h-9A2.25 2.25 0 002.25 7.5v9a2.25 2.25 0 002.25 2.25z"/></svg>
+        </div>
+        <h3 class="service-title">Content Capture</h3>
+        <ul class="service-list">
+          <li>Grabación multicámara</li>
+          <li>Audio broadcast profesional</li>
+          <li>Edición y color</li>
+          <li>Distribución digital</li>
+        </ul>
+        <a href="servicios/content-capture.html" class="service-cta">
+          CONTENT CAPTURE
+          <svg class="arrow-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 19.5l15-15m0 0H8.25m11.25 0v11.25"/></svg>
+        </a>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- DIFFERENTIAL -->
+<section id="diferencial">
+  <div class="container diff-grid">
+    <div class="reveal">
+      <span class="section-label">Diferencial</span>
+      <h2 class="section-title">No solo grabamos.<br>Diseñamos <span class="italic-accent">experiencias</span> audiovisuales.</h2>
+      <p style="font-size:13px;font-weight:600;text-transform:uppercase;letter-spacing:0.2em;color:var(--muted-foreground);margin-top:1.25rem;margin-bottom:0;">Más estratégica, menos estudio tradicional.</p>
+      <div class="pillars">
+        <div class="reveal">
+          <div class="pillar-line"></div>
+          <svg class="pillar-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M9.594 3.94c.09-.542.56-.94 1.11-.94h2.593c.55 0 1.02.398 1.11.94l.213 1.281c.063.374.313.686.645.87.074.04.147.083.22.127.325.196.72.257 1.075.124l1.217-.456a1.125 1.125 0 011.37.49l1.296 2.247a1.125 1.125 0 01-.26 1.431l-1.003.827c-.293.241-.438.613-.43.992a7.723 7.723 0 010 .255c-.008.378.137.75.43.991l1.004.827c.424.35.534.955.26 1.43l-1.298 2.247a1.125 1.125 0 01-1.369.491l-1.217-.456c-.355-.133-.75-.072-1.076.124a6.47 6.47 0 01-.22.128c-.331.183-.581.495-.644.869l-.213 1.281c-.09.543-.56.94-1.11.94h-2.594c-.55 0-1.019-.398-1.11-.94l-.213-1.281c-.062-.374-.312-.686-.644-.87a6.52 6.52 0 01-.22-.127c-.325-.196-.72-.257-1.076-.124l-1.217.456a1.125 1.125 0 01-1.369-.49l-1.297-2.247a1.125 1.125 0 01.26-1.431l1.004-.827c.292-.24.437-.613.43-.991a6.932 6.932 0 010-.255c.007-.38-.138-.751-.43-.992l-1.004-.827a1.125 1.125 0 01-.26-1.43l1.297-2.247a1.125 1.125 0 011.37-.491l1.216.456c.356.133.751.072 1.076-.124.072-.044.146-.086.22-.128.332-.183.582-.495.644-.869l.214-1.28z"/><path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+          <h4 class="pillar-title">Dirección Creativa</h4>
+          <p class="pillar-desc">Acompañamos decisiones creativas desde la idea hasta la entrega. No solo ejecutamos: construimos criterio.</p>
+        </div>
+        <div class="reveal">
+          <div class="pillar-line"></div>
+          <svg class="pillar-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 13.5l10.5-11.25L12 10.5h8.25L9.75 21.75 12 13.5H3.75z"/></svg>
+          <h4 class="pillar-title">Audio · Visual · Performance</h4>
+          <p class="pillar-desc">Integramos sonido, imagen y experiencia dentro del mismo proceso creativo.</p>
+        </div>
+        <div class="reveal">
+          <div class="pillar-line"></div>
+          <svg class="pillar-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M11.48 3.499a.562.562 0 011.04 0l2.125 5.111a.563.563 0 00.475.345l5.518.442c.499.04.701.663.321.988l-4.204 3.602a.563.563 0 00-.182.557l1.285 5.385a.562.562 0 01-.84.61l-4.725-2.885a.563.563 0 00-.586 0L6.982 20.54a.562.562 0 01-.84-.61l1.285-5.386a.562.562 0 00-.182-.557l-4.204-3.602a.563.563 0 01.321-.988l5.518-.442a.563.563 0 00.475-.345L11.48 3.5z"/></svg>
+          <h4 class="pillar-title">Experiencia Aplicada</h4>
+          <p class="pillar-desc">Experiencia real en cine, contenido, performance y producción interdisciplinaria.</p>
+        </div>
+        <div class="reveal">
+          <div class="pillar-line"></div>
+          <svg class="pillar-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M3 13.125C3 12.504 3.504 12 4.125 12h2.25c.621 0 1.125.504 1.125 1.125v6.75C7.5 20.496 6.996 21 6.375 21h-2.25A1.125 1.125 0 013 19.875v-6.75zM9.75 8.625c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125v11.25c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 01-1.125-1.125V8.625zM16.5 4.125c0-.621.504-1.125 1.125-1.125h2.25C20.496 3 21 3.504 21 4.125v15.75c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 01-1.125-1.125V4.125z"/></svg>
+          <h4 class="pillar-title">Del Concepto a la Entrega</h4>
+          <p class="pillar-desc">Producción, captura y postproducción conectadas para evitar fragmentación.</p>
+        </div>
+      </div>
+    </div>
+    <div class="diff-image-wrap reveal">
+      <div class="diff-image-frame">
+        <img src="https://images.unsplash.com/photo-1598488035139-bdbb2231ce04?w=800&q=80" alt="Conectores XLR y hardware analógico con reflejo ámbar" loading="lazy" />
+      </div>
+      <div class="diff-badge">
+        <p class="diff-badge-num">10<span style="font-size:1.5rem">+</span></p>
+        <p class="diff-badge-label">Años en la industria</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PORTFOLIO -->
+<section id="portafolio">
+  <div class="container">
+    <header class="portfolio-header reveal">
+      <div>
+        <span class="section-label">Portafolio</span>
+        <h2 class="section-title">Huella sonora en la industria.</h2>
+      </div>
+      <div class="portfolio-filters">
+        <button class="filter-btn active" data-filter="Todos">Todos</button>
+        <button class="filter-btn" data-filter="Música">Música</button>
+        <button class="filter-btn" data-filter="Audiovisual">Audiovisual</button>
+        <button class="filter-btn" data-filter="Podcast">Podcast</button>
+      </div>
+    </header>
+    <div class="portfolio-grid" id="portfolio-grid">
+      <!-- Cards injected by JS -->
+    </div>
+  </div>
+</section>
+
+<!-- PROCESS -->
+<section id="proceso">
+  <div class="container">
+    <header class="reveal" style="max-width:36rem;margin-bottom:0">
+      <span class="section-label">Cómo trabajamos</span>
+      <h2 class="section-title">Un <span class="italic-accent">proceso</span> diseñado para no improvisar.</h2>
+    </header>
+    <div class="process-steps">
+      <div class="process-line" aria-hidden="true"></div>
+      <div class="reveal">
+        <div class="step-dot"></div>
+        <span class="step-num">PASO 01</span>
+        <h3 class="step-title">Descubrimiento</h3>
+        <p class="step-desc">Escuchamos tu visión, referencias y objetivos. Definimos identidad sonora y alcance.</p>
+      </div>
+      <div class="reveal">
+        <div class="step-dot"></div>
+        <span class="step-num">PASO 02</span>
+        <h3 class="step-title">Planeación</h3>
+        <p class="step-desc">Cronograma, equipo, salas y entregables. Brief técnico firmado antes de grabar la primera nota.</p>
+      </div>
+      <div class="reveal">
+        <div class="step-dot"></div>
+        <span class="step-num">PASO 03</span>
+        <h3 class="step-title">Producción</h3>
+        <p class="step-desc">Grabación, edición, mezcla y diseño sonoro con revisiones colaborativas en cada hito.</p>
+      </div>
+      <div class="reveal">
+        <div class="step-dot"></div>
+        <span class="step-num">PASO 04</span>
+        <h3 class="step-title">Entrega</h3>
+        <p class="step-desc">Masters finales en todos los formatos requeridos, archivos organizados y soporte post-entrega.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section id="testimonios">
+  <div class="container">
+    <header class="reveal" style="max-width:36rem">
+      <span class="section-label">Testimonios</span>
+      <h2 class="section-title">Lo que dicen los proyectos.</h2>
+    </header>
+    <div class="testimonials-grid">
+      <figure class="testimonial reveal">
+        <span class="testimonial-quote-mark" aria-hidden="true">"</span>
+        <blockquote>Skyrock entendió la atmósfera del disco antes que nosotros mismos. La mezcla cambió la forma en que la gente escucha la banda.</blockquote>
+        <figcaption class="testimonial-author">
+          <div class="testimonial-avatar"></div>
+          <div>
+            <div class="testimonial-name">Mariana Cifuentes</div>
+            <div class="testimonial-role">Vocalista · The Neon Velvet</div>
+          </div>
+        </figcaption>
+      </figure>
+      <figure class="testimonial reveal">
+        <span class="testimonial-quote-mark" aria-hidden="true">"</span>
+        <blockquote>El re-recording mix elevó nuestro corto a otro nivel. Premios, festivales y, sobre todo, una identidad sonora que ya es marca registrada.</blockquote>
+        <figcaption class="testimonial-author">
+          <div class="testimonial-avatar"></div>
+          <div>
+            <div class="testimonial-name">Daniel Rojas</div>
+            <div class="testimonial-role">Director · Sombras del Altiplano</div>
+          </div>
+        </figcaption>
+      </figure>
+    </div>
+  </div>
+</section>
+
+<!-- STUDIO -->
+<section id="estudio">
+  <div class="container">
+    <header class="reveal" style="max-width:48rem;margin-bottom:4rem">
+      <span class="section-label">El Estudio</span>
+      <h2 class="section-title">Diseñado para que las ideas se conviertan en <span class="italic-accent">experiencias.</span></h2>
+      <p style="font-size:15px;color:var(--muted-foreground);line-height:1.75;margin-top:1.5rem">
+        Más que una sala de grabación, SKYROCK es un entorno creativo donde sonido, imagen y tecnología trabajan dentro del mismo flujo. Creamos un espacio flexible para desarrollar proyectos musicales, audiovisuales y performáticos desde el concepto hasta la entrega.
+      </p>
+    </header>
+    <div class="studio-image-wrap reveal">
+      <img src="https://images.unsplash.com/photo-1519683109079-d5f539e1542f?w=1600&q=80" alt="Sala principal del estudio Skyrock" loading="lazy" />
+      <div class="studio-image-overlay"></div>
+      <div class="studio-image-label">
+        <div>
+          <p class="section-label" style="margin-bottom:8px">Skyrock Studio · Bogotá</p>
+          <p style="font-size:1.4rem;font-weight:800;letter-spacing:-0.03em">Un entorno creativo para proyectos con identidad.</p>
+        </div>
+      </div>
+    </div>
+    <div class="studio-blocks">
+      <div class="studio-block reveal">
+        <svg class="studio-block-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 21h16.5M4.5 3h15M5.25 3v18m13.5-18v18M9 6.75h1.5m-1.5 3h1.5m-1.5 3h1.5m3-6H15m-1.5 3H15m-1.5 3H15M9 21v-3.375c0-.621.504-1.125 1.125-1.125h3.75c.621 0 1.125.504 1.125 1.125V21"/></svg>
+        <h3 class="studio-block-title">Espacios</h3>
+        <p class="studio-block-desc">Producción, captura y postproducción conectadas dentro del mismo entorno.</p>
+      </div>
+      <div class="studio-block reveal">
+        <svg class="studio-block-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M8.25 3v1.5M4.5 8.25H3m18 0h-1.5M4.5 12H3m18 0h-1.5m-15 3.75H3m18 0h-1.5M8.25 19.5V21M12 3v1.5m0 15V21m3.75-18v1.5m0 15V21m-9-1.5h10.5a2.25 2.25 0 002.25-2.25V6.75a2.25 2.25 0 00-2.25-2.25H6.75A2.25 2.25 0 004.5 6.75v10.5a2.25 2.25 0 002.25 2.25zm.75-12h9v9h-9v-9z"/></svg>
+        <h3 class="studio-block-title">Tecnología</h3>
+        <p class="studio-block-desc">Herramientas profesionales al servicio de las decisiones creativas.</p>
+      </div>
+      <div class="studio-block reveal">
+        <svg class="studio-block-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 13.5l10.5-11.25L12 10.5h8.25L9.75 21.75 12 13.5H3.75z"/></svg>
+        <h3 class="studio-block-title">Flujo</h3>
+        <p class="studio-block-desc">Menos cambios de contexto. Más tiempo creando.</p>
+      </div>
+      <div class="studio-block reveal">
+        <svg class="studio-block-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M19.114 5.636a9 9 0 010 12.728M16.463 8.288a5.25 5.25 0 010 7.424M6.75 8.25l4.72-4.72a.75.75 0 011.28.53v15.88a.75.75 0 01-1.28.53l-4.72-4.72H4.51c-.88 0-1.704-.507-1.938-1.354A9.01 9.01 0 012.25 12c0-.83.112-1.633.322-2.396C2.806 8.756 3.63 8.25 4.51 8.25H6.75z"/></svg>
+        <h3 class="studio-block-title">Ambiente</h3>
+        <p class="studio-block-desc">Diseñado para sostener procesos largos y conversaciones importantes.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contacto">
+  <div class="container contact-grid">
+    <div>
+      <span class="section-label">Contacto</span>
+      <h2 class="section-title reveal" style="margin-bottom:2rem">Empecemos la <span class="italic-accent">conversación.</span></h2>
+      <p class="reveal" style="color:var(--muted-foreground);line-height:1.7;margin-bottom:3rem;max-width:400px">
+        Cada proyecto empieza entendiendo la idea antes que el formato. Déjanos algunos detalles y te responderemos en menos de 24 horas para definir el mejor camino creativo y técnico.
+      </p>
+      <ul class="contact-info-list reveal">
+        <li>
+          <div class="contact-icon-box">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0z"/><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z"/></svg>
+          </div>
+          <span style="font-size:14px">Cr 53 #104B - 35 of 709, Bogotá, Colombia</span>
+        </li>
+        <li>
+          <div class="contact-icon-box">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 002.25-2.25v-1.372c0-.516-.351-.966-.852-1.091l-4.423-1.106c-.44-.11-.902.055-1.173.417l-.97 1.293c-.282.376-.769.542-1.21.38a12.035 12.035 0 01-7.143-7.143c-.162-.441.004-.928.38-1.21l1.293-.97c.363-.271.527-.734.417-1.173L6.963 3.102a1.125 1.125 0 00-1.091-.852H4.5A2.25 2.25 0 002.25 4.5v2.25z"/></svg>
+          </div>
+          <a href="https://wa.me/573125828428" style="font-size:14px">+57 312 582 8428 · WhatsApp</a>
+        </li>
+        <li>
+          <div class="contact-icon-box">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75"/></svg>
+          </div>
+          <a href="mailto:skyrock_co@gmail.com" style="font-size:14px">skyrock_co@gmail.com</a>
+        </li>
+      </ul>
+    </div>
+    <div class="contact-form reveal" id="contact-form-wrap">
+      <form id="contact-form" aria-label="Formulario de contacto">
+        <div class="form-row">
+          <div class="form-field">
+            <label class="form-label" for="nombre">Nombre</label>
+            <input class="form-input" id="nombre" name="nombre" type="text" required />
+          </div>
+          <div class="form-field">
+            <label class="form-label" for="empresa">Empresa / Artista <span style="font-weight:400;opacity:0.6">(opcional)</span></label>
+            <input class="form-input" id="empresa" name="empresa" type="text" />
+          </div>
+        </div>
+        <div class="form-field">
+          <label class="form-label" for="tipo-proyecto">Tipo de proyecto</label>
+          <select class="form-select" id="tipo-proyecto" name="tipo_proyecto" required>
+            <option value="">Seleccionar</option>
+            <option value="creative">Creative Experiences</option>
+            <option value="audiovisual">Audio para Audiovisual</option>
+            <option value="content">Content Creation</option>
+            <option value="otro">Otro</option>
+          </select>
+        </div>
+        <div class="form-row">
+          <div class="form-field">
+            <label class="form-label" for="correo">Correo</label>
+            <input class="form-input" id="correo" name="correo" type="email" required />
+          </div>
+          <div class="form-field">
+            <label class="form-label" for="whatsapp">WhatsApp</label>
+            <input class="form-input" id="whatsapp" name="whatsapp" type="tel" placeholder="+57 312 582 8428" />
+          </div>
+        </div>
+        <div class="form-field">
+          <label class="form-label" for="idea">Cuéntanos tu idea</label>
+          <textarea class="form-input" id="idea" name="idea" rows="4" style="resize:none;padding-top:8px;" placeholder="Describe tu proyecto, referencias o cualquier detalle relevante…" required></textarea>
+        </div>
+        <div class="form-row">
+          <div class="form-field">
+            <label class="form-label" for="fecha">Fecha estimada</label>
+            <input class="form-input" id="fecha" name="fecha" type="text" placeholder="Ej: agosto 2025" />
+          </div>
+          <div class="form-field">
+            <label class="form-label" for="presupuesto">Presupuesto estimado <span style="font-weight:400;opacity:0.6">(opcional)</span></label>
+            <select class="form-select" id="presupuesto" name="presupuesto">
+              <option value="">Seleccionar rango</option>
+              <option value="menos500">Menos de $500 mil</option>
+              <option value="500-2m">$500 mil – $2M</option>
+              <option value="2m-5m">$2M – $5M</option>
+              <option value="5m+">$5M+</option>
+            </select>
+          </div>
+        </div>
+        <button type="submit" class="btn-submit">Enviar proyecto →</button>
+      </form>
+    </div>
+  </div>
+</section>
+
+</main><!-- /#main-content -->
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-main">
+    <div>
+      <picture><source srcset="assets/logo-black.webp" type="image/webp" /><img src="assets/logo-black.png" alt="Skyrock Studio" style="height:90px;width:auto;margin-bottom:1.25rem;" width="332" height="256" /></picture>
+      <p class="footer-brand-desc">Estudio creativo en Bogotá especializado en mezcla, postproducción de audio y producción de contenido audiovisual. Largometrajes, series, cortometrajes y artistas colombianos.</p>
+    </div>
+    <div class="footer-col">
+      <h5>Contacto</h3>
+      <ul>
+        <li><a href="mailto:skyrock_co@gmail.com">skyrock_co@gmail.com</a></li>
+        <li><a href="https://wa.me/573125828428">WhatsApp +57 312 582 8428</a></li>
+        <li><span>Cr 53 #104B - 35 of 709, Bogotá, Colombia</span></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h5>Servicios</h3>
+      <ul>
+        <li><a href="servicios/creative-experiences.html">Creative Experiences</a></li>
+        <li><a href="#servicios">Postproducción Audiovisual</a></li>
+        <li><a href="#servicios">Content Capture</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h5>Síguenos</h3>
+      <ul>
+        <li><a href="https://instagram.com/skyrock_co" target="_blank" rel="noopener">Instagram · @skyrock_co</a></li>
+        <li><a href="https://tiktok.com/@skyrock_co" target="_blank" rel="noopener">TikTok · @skyrock_co</a></li>
+        <li><a href="#">@juanca_garzon</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <div class="footer-bottom-inner">
+      <span>© 2015&nbsp;SKYROCK STUDIO · BOGOTÁ</span>
+      <span style="color:var(--accent-accessible);font-family:var(--font-mono);font-size:10px;text-transform:uppercase;letter-spacing:0.3em;">Built for sound seekers</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // Scroll nav
+  const nav = document.getElementById('main-nav');
+  window.addEventListener('scroll', () => {
+    nav.classList.toggle('scrolled', window.scrollY > 80);
+  }, { passive: true });
+
+  // Reveal on scroll
+  const revealEls = document.querySelectorAll('.reveal');
+  if ('IntersectionObserver' in window) {
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('is-visible'); io.unobserve(e.target); } });
+    }, { rootMargin: '0px 0px -10% 0px', threshold: 0.08 });
+    revealEls.forEach(el => io.observe(el));
+  } else {
+    revealEls.forEach(el => el.classList.add('is-visible'));
+  }
+
+  // Portfolio
+  const PROJECTS = [
+    { title: 'The Neon Velvet — LP', category: 'Música', result: 'Producción integral · #3 charts indie nacionales', img: 'https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?w=600&q=80' },
+    { title: 'Sombras del Altiplano', category: 'Audiovisual', result: 'Re-recording mix 5.1 · Selección oficial FICCI', img: 'https://images.unsplash.com/photo-1478720568477-152d9b164e26?w=600&q=80' },
+    { title: 'Cultura Sonante', category: 'Podcast', result: 'Producción multicámara · +120K oyentes mensuales', img: 'https://images.unsplash.com/photo-1590602847861-f357a9332bbc?w=600&q=80' },
+    { title: 'Andina Eléctrica — EP', category: 'Música', result: 'Mezcla y mastering · Reseña destacada Shock', img: 'https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=600&q=80' },
+    { title: 'Crónicas del Páramo', category: 'Audiovisual', result: 'Diseño sonoro de serie · Premio Macondo nominación', img: 'https://images.unsplash.com/photo-1536440136628-849c177e76a1?w=600&q=80' },
+    { title: 'Frecuencia Bogotá', category: 'Podcast', result: 'Estrategia + grabación · Top 10 Spotify Colombia', img: 'https://images.unsplash.com/photo-1517180102446-f3ece451e9d8?w=600&q=80' },
+  ];
+
+  let currentFilter = 'Todos';
+  const grid = document.getElementById('portfolio-grid');
+
+  function renderProjects() {
+    const filtered = currentFilter === 'Todos' ? PROJECTS : PROJECTS.filter(p => p.category === currentFilter);
+    grid.innerHTML = filtered.map(p => `
+      <article class="project-card reveal">
+        <div class="project-img-wrap">
+          <img src="${p.img}" alt="${p.title}" loading="lazy" />
+          <div class="project-overlay"></div>
+        </div>
+        <div class="project-meta">
+          <div>
+            <p class="project-cat">${p.category}</p>
+            <h3 class="project-title">${p.title}</h3>
+            <p class="project-result">${p.result}</p>
+          </div>
+          <svg class="project-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 19.5l15-15m0 0H8.25m11.25 0v11.25"/></svg>
+        </div>
+      </article>
+    `).join('');
+    // Re-observe new cards
+    grid.querySelectorAll('.reveal').forEach(el => {
+      if ('IntersectionObserver' in window) {
+        const io2 = new IntersectionObserver((entries) => {
+          entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('is-visible'); io2.unobserve(e.target); } });
+        }, { rootMargin: '0px 0px -10% 0px', threshold: 0.08 });
+        io2.observe(el);
+      } else { el.classList.add('is-visible'); }
+    });
+  }
+
+  document.querySelectorAll('.filter-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      currentFilter = btn.dataset.filter;
+      renderProjects();
+    });
+  });
+
+  renderProjects();
+
+  // Contact form — Formspree + WhatsApp
+  document.getElementById('contact-form').addEventListener('submit', async function(e) {
+    e.preventDefault();
+    const btn = e.target.querySelector('.btn-submit');
+    btn.textContent = 'Enviando…'; btn.disabled = true;
+
+    const nombre       = document.getElementById('nombre').value.trim();
+    const empresa      = document.getElementById('empresa').value.trim();
+    const correo       = document.getElementById('correo').value.trim();
+    const whatsapp     = document.getElementById('whatsapp').value.trim();
+    const tipo_proyecto = document.getElementById('tipo-proyecto').value;
+    const idea         = document.getElementById('idea').value.trim();
+    const fecha        = document.getElementById('fecha').value.trim();
+    const presupuesto  = document.getElementById('presupuesto').value;
+
+    try {
+      await fetch('https://formspree.io/f/mojodppv', {
+        method: 'POST',
+        headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' },
+        body: JSON.stringify({ nombre, empresa, correo, whatsapp, tipo_proyecto, idea, fecha, presupuesto })
+      });
+    } catch (_) {}
+
+    document.getElementById('contact-form-wrap').innerHTML = `
+      <div class="form-success">
+        <svg class="form-success-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+        <h3>¡Proyecto recibido!</h3>
+        <p>Te contactamos en menos de 24 horas. Abriendo WhatsApp para confirmar…</p>
+      </div>`;
+
+    const waText = encodeURIComponent(
+      '¡Hola Skyrock Studio! 👋\n\n' +
+      'Acabo de enviar un proyecto desde sky-rock.co:\n\n' +
+      '• Nombre: ' + nombre + '\n' +
+      (empresa ? '• Empresa/Artista: ' + empresa + '\n' : '') +
+      '• Tipo de proyecto: ' + tipo_proyecto + '\n' +
+      (fecha ? '• Fecha estimada: ' + fecha + '\n' : '') +
+      (presupuesto ? '• Presupuesto: ' + presupuesto + '\n' : '') +
+      '• Correo: ' + correo + '\n\n' +
+      '💡 Idea: ' + idea + '\n\n' +
+      'Quedo atento/a a su respuesta. 🎵'
+    );
+    setTimeout(() => window.open('https://wa.me/573125828428?text=' + waText, '_blank'), 800);
+  });
+</script>
+</body>
+</html>
