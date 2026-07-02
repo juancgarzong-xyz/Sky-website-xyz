@@ -1,0 +1,42 @@
+name: Build & Release ZIP
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout repositorio
+        uses: actions/checkout@v4
+
+      - name: Generar ZIP del sitio
+        run: |
+          zip -r skyrock-site.zip . \
+            --exclude "*.git*" \
+            --exclude ".github/*" \
+            --exclude "*.md" \
+            --exclude ".gitignore"
+
+      - name: Eliminar release anterior (latest)
+        run: |
+          gh release delete latest --yes || true
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Crear nuevo Release con el ZIP
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: latest
+          name: "Skyrock Site — ${{ github.event.head_commit.message }}"
+          body: |
+            Actualización automática del sitio.
+            **Commit:** `${{ github.sha }}`
+            **Fecha:** ${{ github.event.head_commit.timestamp }}
+          files: skyrock-site.zip
+          token: ${{ secrets.GITHUB_TOKEN }}
