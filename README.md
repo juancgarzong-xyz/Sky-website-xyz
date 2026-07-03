@@ -25,4 +25,3 @@ Para usar `sky-rock.co`:
 - Email: skyrock_co@gmail.com
 - WhatsApp: +57 312 582 8428
 - Dirección: Cra. 53 #103b - 42, Bogotá, Colombia
-Sitio actualizado.
