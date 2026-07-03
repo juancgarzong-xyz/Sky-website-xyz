@@ -7,7 +7,7 @@
   <link rel="icon" type="image/png" href="../assets/logo-white.png" />
   <link rel="apple-touch-icon" href="../assets/logo-white.png" />
   <meta name="description" content="Skyrock Studio is a creative studio in Bogotá specializing in audio mix, post-production and audiovisual content production. With credits in Colombian feature films and series, we help artists, directors, producers and creative teams transform ideas into a sonic identity." />
-  <meta name="keywords" content="recording studio Bogotá, mix and mastering, audio post-production, video podcast Bogotá, sound design, Skyrock Studio" />
+  <meta name="keywords" content="recording studio Bogotá, audio mix and mastering, audio post-production, video podcast Bogotá, sound design, Skyrock Studio" />
   <meta property="og:title" content="Skyrock Studio · Audio that transforms ideas into experiences" />
   <meta property="og:description" content="Creative studio in Bogotá specializing in audio mix, post-production and audiovisual content for feature films, series and Colombian artists." />
   <meta property="og:type" content="website" />
@@ -281,6 +281,8 @@
     .diff-badge-label { color: var(--accent-foreground); font-size: 10px; text-transform: uppercase; font-weight: 700; letter-spacing: 0.2em; margin-top: 8px; }
 
     /* ---- PORTFOLIO ---- */
+    #portafolio { padding: 8rem 2.5rem; background: var(--background); }
+    @media (min-width: 1024px) { #portafolio { padding: 8rem 6rem; } }
     .portfolio-header { display: flex; flex-direction: column; gap: 2rem; margin-bottom: 4rem; }
     @media (min-width: 768px) { .portfolio-header { flex-direction: row; align-items: flex-end; justify-content: space-between; } }
     .portfolio-filters { display: flex; flex-wrap: wrap; gap: 1.5rem; font-size: 10px; text-transform: uppercase; letter-spacing: 0.25em; font-weight: 700; }
@@ -315,6 +317,8 @@
     .step-desc { font-size: 14px; color: var(--muted-foreground); line-height: 1.6; }
 
     /* ---- TESTIMONIALS ---- */
+    #testimonios { padding: 8rem 2.5rem; background: var(--background); }
+    @media (min-width: 1024px) { #testimonios { padding: 8rem 6rem; } }
     .testimonials-grid { display: grid; gap: 2rem; margin-top: 5rem; }
     @media (min-width: 768px) { .testimonials-grid { grid-template-columns: repeat(2, 1fr); gap: 3rem; } }
     .testimonial {
@@ -403,8 +407,8 @@
     /* SVG Icons inline */
     svg { display: inline-block; }
   </style>
-<link rel="alternate" hreflang="es" href="https://sky-rock.co/index.html" />
-  <link rel="alternate" hreflang="en" href="https://sky-rock.co/en/index.html" />
+<link rel="alternate" hreflang="es" href="https://sky-rock.co/" />
+  <link rel="alternate" hreflang="en" href="https://sky-rock.co/en/" />
 </head>
 <body>
 
@@ -422,6 +426,7 @@
     <div class="nav-links">
       <div class="nav-anchors">
         <a href="#servicios">Services</a>
+        <a href="#portafolio">Portfolio</a>
         <a href="#contacto">Contact</a>
       </div>
       <span class="nav-lang font-mono">
@@ -474,9 +479,9 @@
       <div class="hero-strip-credits">
         <span style="white-space:pre-line;text-align:right">PERROS DE NIEBLA&#10;&#10;CHICAMOCHA FILMS&#10;CO-PRODUCTION&#10;ORIGINAL SCORE&#10;MIX FILM-SCORE</span>
         <span>·</span>
-        <span style="white-space:pre-line;text-align:right">ME LATE QUE SÍ&#10;NETFLIX&#10;&#10;MUSIC ENGINEERING&#10;& PRODUCTION&#10;ASSISTANT&#10;MÚSICA-SIMÓN MEJÍA</span>
+        <span style="white-space:pre-line;text-align:right">ME LATE QUE SÍ&#10;NETFLIX&#10;&#10;ASISTENTE DE&#10;INGENIERIA&#10;Y PRODUCCION&#10;MÚSICA-SIMÓN MEJÍA</span>
         <span>·</span>
-        <span style="white-space:pre-line;text-align:right">ALIX&#10;&#10;MUSIC ENGINEERING&#10;& PRODUCTION&#10;ASSISTANT DE&#10;MÚSICA-SIMÓN MEJÍA&#10;AMAZON PRIME</span>
+        <span style="white-space:pre-line;text-align:right">ALIX&#10;&#10;ASISTENTE DE&#10;INGENIERIA&#10;Y PRODUCCION DE&#10;MÚSICA-SIMÓN MEJÍA&#10;AMAZON PRIME</span>
         <span>·</span>
         <span style="white-space:pre-line;text-align:right">OASIS&#10;&#10;DOME&#10;SOUND DESIGN&#10;7.1 MIX&#10;MIX FILMSCORE&#10;CARLOS DUDLEY</span>
       </div>
@@ -506,14 +511,14 @@
         </div>
         <h3 class="service-title">Creative&#10;Experiences</h3>
         <ul class="service-list">
-          <li>Live performance &amp; scenic direction</li>
-          <li>Live visuals &amp; video mapping</li>
-          <li>Lighting design</li>
-          <li>Interactive &amp; multichannel installations</li>
+          <li>Live performance &amp; dirección escénica</li>
+          <li>Visuales en vivo &amp; video mapping</li>
+          <li>Diseño de iluminación</li>
+          <li>Instalaciones interactivas &amp; multicanal</li>
           <li>Multicamera recording &amp; streaming</li>
         </ul>
-        <a href="../en/servicios/produccion-escenica.html" class="service-cta">
-          SCENIC PRODUCTION ↗
+        <a href="../servicios/creative-experiences.html" class="service-cta">
+          CREATIVE EXPERIENCES ↗
           <svg class="arrow-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 19.5l15-15m0 0H8.25m11.25 0v11.25"/></svg>
         </a>
       </article>
@@ -530,7 +535,7 @@
           <li>Dialogue cleaning</li>
           <li>Deliverables 5.1 / Atmos</li>
         </ul>
-        <a href="../en/servicios/audio-cine.html" class="service-cta">
+        <a href="../servicios/audio-cine.html" class="service-cta">
           AUDIO POST-PRODUCTION ↗
           <svg class="arrow-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 19.5l15-15m0 0H8.25m11.25 0v11.25"/></svg>
         </a>
@@ -541,15 +546,15 @@
           <span class="service-index">03 — CONTENT</span>
           <svg class="service-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 10.5l4.72-4.72a.75.75 0 011.28.53v11.38a.75.75 0 01-1.28.53l-4.72-4.72M4.5 18.75h9a2.25 2.25 0 002.25-2.25v-9a2.25 2.25 0 00-2.25-2.25h-9A2.25 2.25 0 002.25 7.5v9a2.25 2.25 0 002.25 2.25z"/></svg>
         </div>
-        <h3 class="service-title">Content Production</h3>
+        <h3 class="service-title">Content Capture</h3>
         <ul class="service-list">
           <li>Multicamera recording</li>
           <li>Professional broadcast audio</li>
           <li>Editing and color</li>
           <li>Digital distribution</li>
         </ul>
-        <a href="../en/servicios/produccion-contenido.html" class="service-cta">
-          CONTENT PRODUCTION ↗
+        <a href="../servicios/content-capture.html" class="service-cta">
+          CONTENT CAPTURE ↗
           <svg class="arrow-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 19.5l15-15m0 0H8.25m11.25 0v11.25"/></svg>
         </a>
       </article>
@@ -562,32 +567,32 @@
   <div class="container diff-grid">
     <div class="reveal">
       <span class="section-label">What sets us apart</span>
-      <h2 class="section-title">We don't just record.<br>We design <span class="italic-accent">audiovisual</span> experiences.</h2>
-      <p style="font-size:13px;font-weight:600;text-transform:uppercase;letter-spacing:0.2em;color:var(--muted-foreground);margin-top:1.25rem;margin-bottom:0;">More strategic, less traditional studio.</p>
+      <h2 class="section-title">No solo grabamos.<br>Diseñamos <span class="italic-accent">experiencias</span> audiovisuales.</h2>
+      <p style="font-size:13px;font-weight:600;text-transform:uppercase;letter-spacing:0.2em;color:var(--muted-foreground);margin-top:1.25rem;margin-bottom:0;">Más estratégica, menos estudio tradicional.</p>
       <div class="pillars">
         <div class="reveal">
           <div class="pillar-line"></div>
           <svg class="pillar-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M9.594 3.94c.09-.542.56-.94 1.11-.94h2.593c.55 0 1.02.398 1.11.94l.213 1.281c.063.374.313.686.645.87.074.04.147.083.22.127.325.196.72.257 1.075.124l1.217-.456a1.125 1.125 0 011.37.49l1.296 2.247a1.125 1.125 0 01-.26 1.431l-1.003.827c-.293.241-.438.613-.43.992a7.723 7.723 0 010 .255c-.008.378.137.75.43.991l1.004.827c.424.35.534.955.26 1.43l-1.298 2.247a1.125 1.125 0 01-1.369.491l-1.217-.456c-.355-.133-.75-.072-1.076.124a6.47 6.47 0 01-.22.128c-.331.183-.581.495-.644.869l-.213 1.281c-.09.543-.56.94-1.11.94h-2.594c-.55 0-1.019-.398-1.11-.94l-.213-1.281c-.062-.374-.312-.686-.644-.87a6.52 6.52 0 01-.22-.127c-.325-.196-.72-.257-1.076-.124l-1.217.456a1.125 1.125 0 01-1.369-.49l-1.297-2.247a1.125 1.125 0 01.26-1.431l1.004-.827c.292-.24.437-.613.43-.991a6.932 6.932 0 010-.255c.007-.38-.138-.751-.43-.992l-1.004-.827a1.125 1.125 0 01-.26-1.43l1.297-2.247a1.125 1.125 0 011.37-.491l1.216.456c.356.133.751.072 1.076-.124.072-.044.146-.086.22-.128.332-.183.582-.495.644-.869l.214-1.28z"/><path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
           <h4 class="pillar-title">Creative Direction</h4>
-          <p class="pillar-desc">We support creative decisions from idea to delivery. We don't just execute — we build criteria.</p>
+          <p class="pillar-desc">Acompañamos decisiones creativas desde la idea hasta la entrega. No solo ejecutamos: construimos criterio.</p>
         </div>
         <div class="reveal">
           <div class="pillar-line"></div>
           <svg class="pillar-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 13.5l10.5-11.25L12 10.5h8.25L9.75 21.75 12 13.5H3.75z"/></svg>
           <h4 class="pillar-title">Audio · Visual · Performance</h4>
-          <p class="pillar-desc">We integrate sound, image and experience within the same creative process.</p>
+          <p class="pillar-desc">Integramos sonido, imagen y experiencia dentro del mismo proceso creativo.</p>
         </div>
         <div class="reveal">
           <div class="pillar-line"></div>
           <svg class="pillar-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M11.48 3.499a.562.562 0 011.04 0l2.125 5.111a.563.563 0 00.475.345l5.518.442c.499.04.701.663.321.988l-4.204 3.602a.563.563 0 00-.182.557l1.285 5.385a.562.562 0 01-.84.61l-4.725-2.885a.563.563 0 00-.586 0L6.982 20.54a.562.562 0 01-.84-.61l1.285-5.386a.562.562 0 00-.182-.557l-4.204-3.602a.563.563 0 01.321-.988l5.518-.442a.563.563 0 00.475-.345L11.48 3.5z"/></svg>
-          <h4 class="pillar-title">Applied Experience</h4>
-          <p class="pillar-desc">Real experience in film, content, performance and interdisciplinary production.</p>
+          <h4 class="pillar-title">Experiencia Aplicada</h4>
+          <p class="pillar-desc">Experiencia real en cine, contenido, performance y producción interdisciplinaria.</p>
         </div>
         <div class="reveal">
           <div class="pillar-line"></div>
           <svg class="pillar-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M3 13.125C3 12.504 3.504 12 4.125 12h2.25c.621 0 1.125.504 1.125 1.125v6.75C7.5 20.496 6.996 21 6.375 21h-2.25A1.125 1.125 0 013 19.875v-6.75zM9.75 8.625c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125v11.25c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 01-1.125-1.125V8.625zM16.5 4.125c0-.621.504-1.125 1.125-1.125h2.25C20.496 3 21 3.504 21 4.125v15.75c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 01-1.125-1.125V4.125z"/></svg>
-          <h4 class="pillar-title">From Concept to Delivery</h4>
-          <p class="pillar-desc">Production, capture and post-production connected to avoid fragmentation.</p>
+          <h4 class="pillar-title">Del Concepto a la Entrega</h4>
+          <p class="pillar-desc">Producción, captura y postproducción conectadas para evitar fragmentación.</p>
         </div>
       </div>
     </div>
@@ -603,12 +608,33 @@
   </div>
 </section>
 
+<!-- PORTFOLIO -->
+<section id="portafolio">
+  <div class="container">
+    <header class="portfolio-header reveal">
+      <div>
+        <span class="section-label">Portfolio</span>
+        <h2 class="section-title">Huella sonora en la industria.</h2>
+      </div>
+      <div class="portfolio-filters">
+        <button class="filter-btn active" data-filter="Todos">Todos</button>
+        <button class="filter-btn" data-filter="Música">Música</button>
+        <button class="filter-btn" data-filter="Audiovisual">Audiovisual</button>
+        <button class="filter-btn" data-filter="Podcast">Podcast</button>
+      </div>
+    </header>
+    <div class="portfolio-grid" id="portfolio-grid">
+      <!-- Cards injected by JS -->
+    </div>
+  </div>
+</section>
+
 <!-- PROCESS -->
 <section id="proceso">
   <div class="container">
     <header class="reveal" style="max-width:36rem;margin-bottom:0">
       <span class="section-label">How we work</span>
-      <h2 class="section-title">A <span class="italic-accent">process</span> designed to<br>Never improvise.</h2>
+      <h2 class="section-title">Un <span class="italic-accent">proceso</span> diseñado para<br>No improvisar.</h2>
     </header>
     <div class="process-steps">
       <div class="process-line" aria-hidden="true"></div>
@@ -616,7 +642,7 @@
         <div class="step-dot"></div>
         <span class="step-num">STEP 01</span>
         <h3 class="step-title">Discovery</h3>
-        <p class="step-desc">We listen to your visions y objetivos. Definimos identidad sonora y alcance.</p>
+        <p class="step-desc">Escuchamos tu visión, referencias y objetivos. Definimos identidad sonora y alcance.</p>
       </div>
       <div class="reveal">
         <div class="step-dot"></div>
@@ -640,14 +666,48 @@
   </div>
 </section>
 
+<!-- TESTIMONIALS -->
+<section id="testimonios">
+  <div class="container">
+    <header class="reveal" style="max-width:36rem">
+      <span class="section-label">Testimonials</span>
+      <h2 class="section-title">What projects say.</h2>
+    </header>
+    <div class="testimonials-grid">
+      <figure class="testimonial reveal">
+        <span class="testimonial-quote-mark" aria-hidden="true">"</span>
+        <blockquote>Skyrock understood the album's atmosphere before we did ourselves. The mix changed the way people listen to the band.</blockquote>
+        <figcaption class="testimonial-author">
+          <div class="testimonial-avatar"></div>
+          <div>
+            <div class="testimonial-name">Mariana Cifuentes</div>
+            <div class="testimonial-role">Vocalist · The Neon Velvet</div>
+          </div>
+        </figcaption>
+      </figure>
+      <figure class="testimonial reveal">
+        <span class="testimonial-quote-mark" aria-hidden="true">"</span>
+        <blockquote>The re-recording mix took our short film to another level. Awards, festivals and, above all, a sonic identity that is now a trademark.</blockquote>
+        <figcaption class="testimonial-author">
+          <div class="testimonial-avatar"></div>
+          <div>
+            <div class="testimonial-name">Daniel Rojas</div>
+            <div class="testimonial-role">Director · Sombras del Altiplano</div>
+          </div>
+        </figcaption>
+      </figure>
+    </div>
+  </div>
+</section>
+
 <!-- STUDIO -->
 <section id="estudio">
   <div class="container">
     <header class="reveal" style="max-width:48rem;margin-bottom:4rem">
       <span class="section-label">The Studio</span>
-      <h2 class="section-title">Designed for ideas to become <span class="italic-accent">experiences.</span></h2>
+      <h2 class="section-title">Diseñado para que las ideas se conviertan en <span class="italic-accent">experiencias.</span></h2>
       <p style="font-size:15px;color:var(--muted-foreground);line-height:1.75;margin-top:1.5rem">
-        More than a recording room, SKYROCK is a creative environment where sound, image and technology work within the same flow. A flexible space for developing musical, audiovisual and performative projects from concept to delivery.
+        Más que una sala de grabación, SKYROCK es un entorno creativo donde sonido, imagen y tecnología trabajan dentro del mismo flujo. Creamos un espacio flexible para desarrollar proyectos musicales, audiovisuales y performáticos desde el concepto hasta la entrega.
       </p>
     </header>
     <div class="studio-image-wrap reveal">
@@ -656,7 +716,7 @@
       <div class="studio-image-label">
         <div>
           <p class="section-label" style="margin-bottom:8px">Skyrock Studio · Bogotá</p>
-          <p style="font-size:1.4rem;font-weight:800;letter-spacing:-0.03em">A creative environment for projects with identity.</p>
+          <p style="font-size:1.4rem;font-weight:800;letter-spacing:-0.03em">Un entorno creativo para proyectos con identidad.</p>
         </div>
       </div>
     </div>
@@ -664,22 +724,22 @@
       <div class="studio-block reveal">
         <svg class="studio-block-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 21h16.5M4.5 3h15M5.25 3v18m13.5-18v18M9 6.75h1.5m-1.5 3h1.5m-1.5 3h1.5m3-6H15m-1.5 3H15m-1.5 3H15M9 21v-3.375c0-.621.504-1.125 1.125-1.125h3.75c.621 0 1.125.504 1.125 1.125V21"/></svg>
         <h3 class="studio-block-title">Spaces</h3>
-        <p class="studio-block-desc">Production, capture and post-production connected within the same environment.</p>
+        <p class="studio-block-desc">Producción, captura y postproducción conectadas dentro del mismo entorno.</p>
       </div>
       <div class="studio-block reveal">
         <svg class="studio-block-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M8.25 3v1.5M4.5 8.25H3m18 0h-1.5M4.5 12H3m18 0h-1.5m-15 3.75H3m18 0h-1.5M8.25 19.5V21M12 3v1.5m0 15V21m3.75-18v1.5m0 15V21m-9-1.5h10.5a2.25 2.25 0 002.25-2.25V6.75a2.25 2.25 0 00-2.25-2.25H6.75A2.25 2.25 0 004.5 6.75v10.5a2.25 2.25 0 002.25 2.25zm.75-12h9v9h-9v-9z"/></svg>
-        <h3 class="studio-block-title">Technology</h3>
-        <p class="studio-block-desc">Professional tools at the service of creative decisions.</p>
+        <h3 class="studio-block-title">Tecnología</h3>
+        <p class="studio-block-desc">Herramientas profesionales al servicio de las decisiones creativas.</p>
       </div>
       <div class="studio-block reveal">
         <svg class="studio-block-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 13.5l10.5-11.25L12 10.5h8.25L9.75 21.75 12 13.5H3.75z"/></svg>
-        <h3 class="studio-block-title">Flow</h3>
-        <p class="studio-block-desc">Less context switching. More time creating.</p>
+        <h3 class="studio-block-title">Flujo</h3>
+        <p class="studio-block-desc">Menos cambios de contexto. Más tiempo creando.</p>
       </div>
       <div class="studio-block reveal">
         <svg class="studio-block-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M19.114 5.636a9 9 0 010 12.728M16.463 8.288a5.25 5.25 0 010 7.424M6.75 8.25l4.72-4.72a.75.75 0 011.28.53v15.88a.75.75 0 01-1.28.53l-4.72-4.72H4.51c-.88 0-1.704-.507-1.938-1.354A9.01 9.01 0 012.25 12c0-.83.112-1.633.322-2.396C2.806 8.756 3.63 8.25 4.51 8.25H6.75z"/></svg>
         <h3 class="studio-block-title">Atmosphere</h3>
-        <p class="studio-block-desc">Designed to sustain long processes and important conversations.</p>
+        <p class="studio-block-desc">Diseñado para sostener procesos largos y conversaciones importantes.</p>
       </div>
     </div>
   </div>
@@ -690,9 +750,9 @@
   <div class="container contact-grid">
     <div>
       <span class="section-label">Contact</span>
-      <h2 class="section-title reveal" style="margin-bottom:2rem">Let's start the <span class="italic-accent">conversation.</span></h2>
+      <h2 class="section-title reveal" style="margin-bottom:2rem">Empecemos la <span class="italic-accent">conversación.</span></h2>
       <p class="reveal" style="color:var(--muted-foreground);line-height:1.7;margin-bottom:3rem;max-width:400px">
-        Every project starts by understanding the idea before the format. Leave us some details and we'll get back to you within 24 hours to define the best creative and technical path.
+        Cada proyecto empieza entendiendo la idea antes que el formato. Déjanos algunos detalles y te responderemos en menos de 24 horas para definir el mejor camino creativo y técnico.
       </p>
       <ul class="contact-info-list reveal">
         <li>
@@ -711,18 +771,18 @@
             <input class="form-input" id="nombre" name="nombre" type="text" required />
           </div>
           <div class="form-field">
-            <label class="form-label" for="empresa">Company / Artist <span style="font-weight:400;opacity:0.6">(optional)</span></label>
+            <label class="form-label" for="empresa">Empresa / Artista <span style="font-weight:400;opacity:0.6">(opcional)</span></label>
             <input class="form-input" id="empresa" name="empresa" type="text" />
           </div>
         </div>
         <div class="form-field">
-          <label class="form-label" for="tipo-proyecto">Project type</label>
+          <label class="form-label" for="tipo-proyecto">Tipo de proyecto</label>
           <select class="form-select" id="tipo-proyecto" name="tipo_proyecto" required>
             <option value="">Seleccionar</option>
-            <option value="creative">Scenic Production &amp; Experiences</option>
-            <option value="audiovisual">Audio for Audiovisual</option>
-            <option value="content">Content Production</option>
-            <option value="otro">Other</option>
+            <option value="creative">Creative Experiences</option>
+            <option value="audiovisual">Audio para Audiovisual</option>
+            <option value="content">Content Creation</option>
+            <option value="otro">Otro</option>
           </select>
         </div>
         <div class="form-field">
@@ -730,26 +790,26 @@
           <input class="form-input" id="correo" name="correo" type="email" required />
         </div>
         <div class="form-field">
-          <label class="form-label" for="idea">Tell us your idea</label>
-          <textarea class="form-input" id="idea" name="idea" rows="4" style="resize:none;padding-top:8px;" placeholder="Describe your project, references or any relevant details…" required></textarea>
+          <label class="form-label" for="idea">Cuéntanos tu idea</label>
+          <textarea class="form-input" id="idea" name="idea" rows="4" style="resize:none;padding-top:8px;" placeholder="Describe tu proyecto, referencias o cualquier detalle relevante…" required></textarea>
         </div>
         <div class="form-row">
           <div class="form-field">
-            <label class="form-label" for="fecha">Estimated date</label>
-            <input class="form-input" id="fecha" name="fecha" type="text" placeholder="E.g.: August 2025" />
+            <label class="form-label" for="fecha">Fecha estimada</label>
+            <input class="form-input" id="fecha" name="fecha" type="text" placeholder="Ej: agosto 2025" />
           </div>
           <div class="form-field">
-            <label class="form-label" for="presupuesto">Estimated budget <span style="font-weight:400;opacity:0.6">(optional)</span></label>
+            <label class="form-label" for="presupuesto">Presupuesto estimado <span style="font-weight:400;opacity:0.6">(opcional)</span></label>
             <select class="form-select" id="presupuesto" name="presupuesto">
               <option value="">Select range</option>
-              <option value="menos500">Less than $500K COP</option>
-              <option value="500-2m">$500K – $2M COP</option>
-              <option value="2m-5m">$2M – $5M COP</option>
+              <option value="menos500">Menos de $500 mil</option>
+              <option value="500-2m">$500 mil – $2M</option>
+              <option value="2m-5m">$2M – $5M</option>
               <option value="5m+">$5M+</option>
             </select>
           </div>
         </div>
-        <button type="submit" class="btn-submit">Send project →</button>
+        <button type="submit" class="btn-submit">Enviar proyecto →</button>
       </form>
     </div>
   </div>
@@ -773,9 +833,9 @@
     <div class="footer-col">
       <h5>Services</h3>
       <ul>
-        <li><a href="../en/servicios/produccion-escenica.html">Scenic Production &amp; Experiences</a></li>
+        <li><a href="../servicios/creative-experiences.html">Creative Experiences</a></li>
         <li><a href="#servicios">Postproducción Audiovisual</a></li>
-        <li><a href="#servicios">Content Production</a></li>
+        <li><a href="#servicios">Content Capture</a></li>
       </ul>
     </div>
     <div class="footer-col">
@@ -814,6 +874,53 @@
   }
 
   // Portfolio
+  const PROJECTS = [
+    { title: 'The Neon Velvet — LP', category: 'Música', result: 'Producción integral · #3 charts indie nacionales', img: 'https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?w=600&q=80' },
+    { title: 'Sombras del Altiplano', category: 'Audiovisual', result: 'Re-recording mix 5.1 · Selección oficial FICCI', img: 'https://images.unsplash.com/photo-1478720568477-152d9b164e26?w=600&q=80' },
+    { title: 'Cultura Sonante', category: 'Podcast', result: 'Producción multicámara · +120K oyentes mensuales', img: 'https://images.unsplash.com/photo-1590602847861-f357a9332bbc?w=600&q=80' },
+    { title: 'Andina Eléctrica — EP', category: 'Música', result: 'Mezcla y mastering · Reseña destacada Shock', img: 'https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=600&q=80' },
+    { title: 'Crónicas del Páramo', category: 'Audiovisual', result: 'Diseño sonoro de serie · Premio Macondo nominación', img: 'https://images.unsplash.com/photo-1536440136628-849c177e76a1?w=600&q=80' },
+    { title: 'Frecuencia Bogotá', category: 'Podcast', result: 'Estrategia + grabación · Top 10 Spotify Colombia', img: 'https://images.unsplash.com/photo-1517180102446-f3ece451e9d8?w=600&q=80' },
+  ];
+
+  let currentFilter = 'Todos';
+  const grid = document.getElementById('portfolio-grid');
+
+  function renderProjects() {
+    const filtered = currentFilter === 'Todos' ? PROJECTS : PROJECTS.filter(p => p.category === currentFilter);
+    grid.innerHTML = filtered.map(p => `
+      <article class="project-card reveal">
+        <div class="project-img-wrap">
+          <img src="${p.img}" alt="${p.title}" loading="lazy" />
+          <div class="project-overlay"></div>
+        </div>
+        <div class="project-meta">
+          <div>
+            <p class="project-cat">${p.category}</p>
+            <h3 class="project-title">${p.title}</h3>
+            <p class="project-result">${p.result}</p>
+          </div>
+          <svg class="project-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 19.5l15-15m0 0H8.25m11.25 0v11.25"/></svg>
+        </div>
+      </article>
+    `).join('');
+    // Re-observe new cards
+    grid.querySelectorAll('.reveal').forEach(el => {
+      if ('IntersectionObserver' in window) {
+        const io2 = new IntersectionObserver((entries) => {
+          entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('is-visible'); io2.unobserve(e.target); } });
+        }, { rootMargin: '0px 0px -10% 0px', threshold: 0.08 });
+        io2.observe(el);
+      } else { el.classList.add('is-visible'); }
+    });
+  }
+
+  document.querySelectorAll('.filter-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      currentFilter = btn.dataset.filter;
+      renderProjects();
     });
   });
 
@@ -844,8 +951,8 @@
     document.getElementById('contact-form-wrap').innerHTML = `
       <div class="form-success">
         <svg class="form-success-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
-        <h3>Project received!</h3>
-        <p>We'll reach out within 24 hours to define the best creative and technical path.</p>
+        <h3>¡Proyecto recibido!</h3>
+        <p>Te contactamos en menos de 24 horas para definir el mejor camino creativo y técnico.</p>
       </div>`;
   });
 </script>

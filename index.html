@@ -428,9 +428,9 @@
         <a href="#contacto">Contacto</a>
       </div>
       <span class="nav-lang font-mono">
-        <span>ESP</span>
+        <span style="font-weight:700">ESP</span>
         <span style="opacity:0.4">·</span>
-        <span style="opacity:0.4">ENG</span>
+        <a href="en/index.html" style="opacity:0.4;color:inherit;">ENG</a>
       </span>
     </div>
   </div>
@@ -632,7 +632,7 @@
   <div class="container">
     <header class="reveal" style="max-width:36rem;margin-bottom:0">
       <span class="section-label">Cómo trabajamos</span>
-      <h2 class="section-title">Un <span class="italic-accent">proceso</span> diseñado para no improvisar.</h2>
+      <h2 class="section-title">Un <span class="italic-accent">proceso</span> diseñado para<br>No improvisar.</h2>
     </header>
     <div class="process-steps">
       <div class="process-line" aria-hidden="true"></div>
@@ -759,18 +759,6 @@
           </div>
           <span style="font-size:14px">Cr 53 #104B - 35 of 709, Bogotá, Colombia</span>
         </li>
-        <li>
-          <div class="contact-icon-box">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 002.25-2.25v-1.372c0-.516-.351-.966-.852-1.091l-4.423-1.106c-.44-.11-.902.055-1.173.417l-.97 1.293c-.282.376-.769.542-1.21.38a12.035 12.035 0 01-7.143-7.143c-.162-.441.004-.928.38-1.21l1.293-.97c.363-.271.527-.734.417-1.173L6.963 3.102a1.125 1.125 0 00-1.091-.852H4.5A2.25 2.25 0 002.25 4.5v2.25z"/></svg>
-          </div>
-          <a href="https://wa.me/573125828428" style="font-size:14px">+57 312 582 8428 · WhatsApp</a>
-        </li>
-        <li>
-          <div class="contact-icon-box">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75"/></svg>
-          </div>
-          <a href="mailto:skyrock_co@gmail.com" style="font-size:14px">skyrock_co@gmail.com</a>
-        </li>
       </ul>
     </div>
     <div class="contact-form reveal" id="contact-form-wrap">
@@ -795,15 +783,9 @@
             <option value="otro">Otro</option>
           </select>
         </div>
-        <div class="form-row">
-          <div class="form-field">
-            <label class="form-label" for="correo">Correo</label>
-            <input class="form-input" id="correo" name="correo" type="email" required />
-          </div>
-          <div class="form-field">
-            <label class="form-label" for="whatsapp">WhatsApp</label>
-            <input class="form-input" id="whatsapp" name="whatsapp" type="tel" placeholder="+57 312 582 8428" />
-          </div>
+        <div class="form-field">
+          <label class="form-label" for="correo">Correo</label>
+          <input class="form-input" id="correo" name="correo" type="email" required />
         </div>
         <div class="form-field">
           <label class="form-label" for="idea">Cuéntanos tu idea</label>
@@ -843,8 +825,6 @@
     <div class="footer-col">
       <h5>Contacto</h3>
       <ul>
-        <li><a href="mailto:skyrock_co@gmail.com">skyrock_co@gmail.com</a></li>
-        <li><a href="https://wa.me/573125828428">WhatsApp +57 312 582 8428</a></li>
         <li><span>Cr 53 #104B - 35 of 709, Bogotá, Colombia</span></li>
       </ul>
     </div>
@@ -944,7 +924,7 @@
 
   renderProjects();
 
-  // Contact form — Formspree + WhatsApp
+  // Contact form — Formspree
   document.getElementById('contact-form').addEventListener('submit', async function(e) {
     e.preventDefault();
     const btn = e.target.querySelector('.btn-submit');
@@ -953,7 +933,6 @@
     const nombre       = document.getElementById('nombre').value.trim();
     const empresa      = document.getElementById('empresa').value.trim();
     const correo       = document.getElementById('correo').value.trim();
-    const whatsapp     = document.getElementById('whatsapp').value.trim();
     const tipo_proyecto = document.getElementById('tipo-proyecto').value;
     const idea         = document.getElementById('idea').value.trim();
     const fecha        = document.getElementById('fecha').value.trim();
@@ -963,7 +942,7 @@
       await fetch('https://formspree.io/f/mojodppv', {
         method: 'POST',
         headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' },
-        body: JSON.stringify({ nombre, empresa, correo, whatsapp, tipo_proyecto, idea, fecha, presupuesto })
+        body: JSON.stringify({ nombre, empresa, correo, tipo_proyecto, idea, fecha, presupuesto })
       });
     } catch (_) {}
 
@@ -971,22 +950,8 @@
       <div class="form-success">
         <svg class="form-success-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
         <h3>¡Proyecto recibido!</h3>
-        <p>Te contactamos en menos de 24 horas. Abriendo WhatsApp para confirmar…</p>
+        <p>Te contactamos en menos de 24 horas para definir el mejor camino creativo y técnico.</p>
       </div>`;
-
-    const waText = encodeURIComponent(
-      '¡Hola Skyrock Studio! 👋\n\n' +
-      'Acabo de enviar un proyecto desde sky-rock.co:\n\n' +
-      '• Nombre: ' + nombre + '\n' +
-      (empresa ? '• Empresa/Artista: ' + empresa + '\n' : '') +
-      '• Tipo de proyecto: ' + tipo_proyecto + '\n' +
-      (fecha ? '• Fecha estimada: ' + fecha + '\n' : '') +
-      (presupuesto ? '• Presupuesto: ' + presupuesto + '\n' : '') +
-      '• Correo: ' + correo + '\n\n' +
-      '💡 Idea: ' + idea + '\n\n' +
-      'Quedo atento/a a su respuesta. 🎵'
-    );
-    setTimeout(() => window.open('https://wa.me/573125828428?text=' + waText, '_blank'), 800);
   });
 </script>
 </body>
