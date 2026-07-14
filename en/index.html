@@ -259,10 +259,27 @@
     .arrow-icon { width: 16px; height: 16px; }
 
     /* ---- DIFFERENTIAL ---- */
-    #diferencial { padding: 8rem 2.5rem; background: var(--surface); position: relative; }
+    #diferencial {
+      padding: 8rem 2.5rem; position: relative; overflow: hidden;
+      background: var(--dark);
+    }
     @media (min-width: 1024px) { #diferencial { padding: 8rem 6rem; } }
-    .diff-grid { display: grid; gap: 4rem; align-items: center; }
-    @media (min-width: 1024px) { .diff-grid { grid-template-columns: repeat(2, 1fr); gap: 6rem; } }
+    .diff-bg {
+      position: absolute; inset: 0; z-index: 0;
+      background-image: url('../assets/diferencial.jpg'); background-size: cover; background-position: center;
+      opacity: 0.25; filter: grayscale(0.3);
+    }
+    .diff-overlay {
+      position: absolute; inset: 0; z-index: 1;
+      background: linear-gradient(135deg, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.55) 100%);
+    }
+    .diff-grid { display: grid; gap: 4rem; align-items: center; position: relative; z-index: 2; max-width: 800px; }
+    @media (min-width: 1024px) { .diff-grid { gap: 4rem; } }
+    .diff-grid .section-label { color: var(--accent); }
+    .diff-grid .section-title { color: #fff; }
+    .diff-grid .italic-accent { color: var(--accent); }
+    .pillar-title { color: #fff; }
+    .pillar-desc { color: rgba(255,255,255,0.6); }
     .pillars { display: grid; grid-template-columns: repeat(2, 1fr); gap: 2.5rem 2rem; margin-top: 3rem; }
     .pillar-line { height: 1px; width: 48px; background: color-mix(in oklab, var(--accent) 40%, transparent); margin-bottom: 1.25rem; }
     .pillar-icon { width: 20px; height: 20px; color: var(--accent); margin-bottom: 1rem; }
@@ -564,11 +581,13 @@
 
 <!-- DIFFERENTIAL -->
 <section id="diferencial">
+  <div class="diff-bg"></div>
+  <div class="diff-overlay"></div>
   <div class="container diff-grid">
     <div class="reveal">
       <span class="section-label">What sets us apart</span>
       <h2 class="section-title">We don't just record.<br>We design <span class="italic-accent">audiovisual</span> experiences.</h2>
-      <p style="font-size:13px;font-weight:600;text-transform:uppercase;letter-spacing:0.2em;color:var(--muted-foreground);margin-top:1.25rem;margin-bottom:0;">More strategic, less traditional studio.</p>
+      <p style="font-size:13px;font-weight:600;text-transform:uppercase;letter-spacing:0.2em;color:rgba(255,255,255,0.5);margin-top:1.25rem;margin-bottom:0;">More strategic, less traditional studio.</p>
       <div class="pillars">
         <div class="reveal">
           <div class="pillar-line"></div>
@@ -596,16 +615,6 @@
         </div>
       </div>
     </div>
-    <div class="diff-image-wrap reveal">
-      <div class="diff-image-frame">
-        <picture>
-          <source srcset="../assets/diferencial.webp" type="image/webp" />
-          <img src="../assets/diferencial.jpg" alt="Skyrock Studio — producción en vivo, consola de mezcla y multicámara" loading="lazy" width="1200" height="779" />
-        </picture>
-      </div>
-      <div class="diff-badge">
-        <p class="diff-badge-num">10<span style="font-size:1.5rem">+</span></p>
-        <p class="diff-badge-label">Years in the industry</p>
       </div>
     </div>
   </div>
