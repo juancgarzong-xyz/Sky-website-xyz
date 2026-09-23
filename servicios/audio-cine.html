@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Audio para Cine y Audiovisual · Skyrock Studio Bogotá</title>
+  <meta name="description" content="Postproducción de audio para cine, series y cortometrajes en Bogotá. Re-recording mix, diseño sonoro, limpieza de diálogos y entregables 5.1 / Dolby Atmos. Créditos en largometrajes y series colombianas." />
+  <link rel="icon" type="image/png" href="../assets/logo-white.png" width="332" height="256" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="preload" href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,400;0,700;0,800;0,900;1,300;1,700&family=JetBrains+Mono:wght@400;500&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'" />
+  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,400;0,700;0,800;0,900;1,300;1,700&family=JetBrains+Mono:wght@400;500&display=swap" /></noscript>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --bg: #ffffff; --dark: #000000; --fg: #0a0a0a;
+      --muted: #666666; --accent: #198d99;
+      --accent-accessible: #0c6570;
+      --surface: #f4f4f4; --border: rgba(10,10,10,0.10);
+      --glow: 0 10px 40px -12px rgba(25,141,153,0.4);
+      --sans: 'Montserrat', system-ui, sans-serif;
+      --mono: 'JetBrains Mono', ui-monospace, monospace;
+    }
+    html { scroll-behavior: smooth; background: var(--bg); }
+    body { font-family: var(--sans); color: var(--fg); -webkit-font-smoothing: antialiased; overflow-x: hidden; }
+    a { text-decoration: none; color: inherit; }
+
+    nav { position: fixed; top: 0; left: 0; right: 0; z-index: 50; background: rgba(255,255,255,0.95); backdrop-filter: blur(12px); border-bottom: 1px solid var(--border); }
+    .nav-inner { max-width: 1100px; margin: 0 auto; padding: 0 2rem; height: 68px; display: flex; align-items: center; justify-content: space-between; }
+    .nav-inner a img { height: 38px; width: auto; }
+    .nav-back { font-family: var(--mono); font-size: 10px; letter-spacing: 0.3em; text-transform: uppercase; color: var(--muted); display: flex; align-items: center; gap: 8px; transition: color 0.2s; }
+    .nav-back:hover { color: var(--accent); }
+    .nav-cta { background: var(--accent); color: #fff; padding: 10px 22px; min-height: 44px; display:inline-flex; align-items:center; border-radius: 6px; font-size: 12px; font-weight: 700; letter-spacing: 0.05em; transition: opacity 0.2s; }
+    .nav-cta:hover { opacity: 0.85; }
+
+    .hero { min-height: 100dvh; background: var(--dark); color: #fff; display: flex; flex-direction: column; justify-content: flex-end; padding: 0 2rem 5rem; position: relative; overflow: hidden; padding-top: 68px; }
+    .hero-noise { position: absolute; inset: 0; opacity: 0.04; background-image: url("data:image/svg+xml;utf8,<svg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>"); pointer-events: none; }
+    .hero-lines { position: absolute; inset: 0; opacity: 0.06; background-image: linear-gradient(to bottom, rgba(255,255,255,0.15) 1px, transparent 1px); background-size: 100% 60px; pointer-events: none; }
+    .hero-accent-bar { position: absolute; bottom: 0; left: 0; right: 0; height: 3px; background: linear-gradient(to right, var(--accent), transparent); }
+    .hero-content { max-width: 1100px; margin: 0 auto; width: 100%; position: relative; z-index: 2; }
+    .service-tag { font-family: var(--mono); font-size: 10px; letter-spacing: 0.45em; text-transform: uppercase; color: var(--accent-accessible); margin-bottom: 2rem; display: flex; align-items: center; gap: 12px; }
+    .service-tag::before { content: ''; display: block; width: 32px; height: 1px; background: var(--accent); }
+    h1 { font-size: clamp(3rem, 9vw, 7.5rem); font-weight: 800; letter-spacing: -0.04em; line-height: 0.9; margin-bottom: 2.5rem; }
+    h1 em { font-style: italic; font-weight: 300; color: var(--accent); }
+    .hero-desc { font-size: clamp(1rem, 2vw, 1.2rem); color: rgba(255,255,255,0.65); max-width: 560px; line-height: 1.7; margin-bottom: 3rem; }
+    .hero-ctas { display: flex; flex-wrap: wrap; gap: 1rem; }
+    .btn-primary { display: inline-flex; align-items: center; gap: 8px; background: #fff; color: var(--fg); padding: 14px 28px; border-radius: 6px; font-weight: 700; font-size: 13px; border: none; cursor: pointer; transition: all 0.2s; font-family: var(--sans); }
+    .btn-primary:hover { background: var(--accent); color: #fff; box-shadow: var(--glow); }
+    .btn-outline { display: inline-flex; align-items: center; gap: 8px; background: transparent; color: rgba(255,255,255,0.8); padding: 14px 28px; border-radius: 6px; font-weight: 600; font-size: 13px; border: 1px solid rgba(255,255,255,0.25); cursor: pointer; transition: all 0.2s; font-family: var(--sans); }
+    .btn-outline:hover { border-color: var(--accent); color: var(--accent); }
+    .credits-strip { display: flex; flex-wrap: wrap; gap: 2rem; margin-top: 4rem; padding-top: 2.5rem; border-top: 1px solid rgba(255,255,255,0.1); }
+    .credit { }
+    .credit-title { font-weight: 700; font-size: 13px; color: #fff; }
+    .credit-role { font-family: var(--mono); font-size: 9px; text-transform: uppercase; letter-spacing: 0.3em; color: var(--accent); margin-top: 4px; }
+
+    section { padding: 6rem 2rem; }
+    .container { max-width: 1100px; margin: 0 auto; }
+    .label { font-family: var(--mono); font-size: 10px; text-transform: uppercase; letter-spacing: 0.4em; color: var(--accent-accessible); margin-bottom: 1rem; }
+    .section-title { font-size: clamp(2rem, 4vw, 3.2rem); font-weight: 800; letter-spacing: -0.04em; line-height: 1; margin-bottom: 1.5rem; }
+    .section-title em { font-style: italic; font-weight: 300; color: var(--accent); }
+
+    /* DELIVERABLES */
+    .deliverables { display: grid; gap: 1px; background: var(--border); margin-top: 3.5rem; }
+    @media(min-width:768px){ .deliverables { grid-template-columns: repeat(2,1fr); } }
+    @media(min-width:1024px){ .deliverables { grid-template-columns: repeat(4,1fr); } }
+    .del { background: var(--bg); padding: 2.5rem 2rem; transition: background 0.3s; }
+    .del:hover { background: var(--surface); }
+    .del-icon { width: 32px; height: 2px; background: var(--accent); margin-bottom: 1.5rem; }
+    .del-title { font-size: 1.1rem; font-weight: 700; letter-spacing: -0.02em; margin-bottom: 8px; }
+    .del-desc { font-size: 13px; color: var(--muted); line-height: 1.6; }
+
+    /* FORMATS */
+    #formatos { background: var(--surface); }
+    .formats-grid { display: grid; gap: 1rem; margin-top: 3rem; }
+    @media(min-width:640px){ .formats-grid { grid-template-columns: repeat(3,1fr); } }
+    .format-tag { background: var(--bg); border: 1px solid var(--border); padding: 1.25rem 1.5rem; display: flex; align-items: center; gap: 12px; font-weight: 700; font-size: 14px; transition: border-color 0.2s; }
+    .format-tag:hover { border-color: var(--accent); }
+    .format-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--accent); flex-shrink: 0; }
+
+    #cta { background: var(--dark); color: #fff; text-align: center; }
+    #cta .section-title { color: #fff; }
+    #cta p { color: rgba(255,255,255,0.55); max-width: 480px; margin: 1.5rem auto 2.5rem; line-height: 1.7; }
+
+    footer { background: var(--bg); border-top: 1px solid var(--border); padding: 2rem; }
+    .footer-inner { max-width: 1100px; margin: 0 auto; display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 1rem; }
+    .footer-inner img { height: 36px; width: auto; }
+    .footer-inner p { font-family: var(--mono); font-size: 9px; text-transform: uppercase; letter-spacing: 0.3em; color: var(--muted); }
+    .footer-inner a { font-family: var(--mono); font-size: 9px; text-transform: uppercase; letter-spacing: 0.3em; color: var(--accent); }
+
+    .reveal { opacity:0; transform:translateY(16px); transition: opacity 0.7s cubic-bezier(0.16,1,0.3,1), transform 0.7s cubic-bezier(0.16,1,0.3,1); }
+    .reveal.on { opacity:1; transform:translateY(0); }
+    @media(prefers-reduced-motion:reduce){ .reveal{ opacity:1; transform:none; transition:none; } }
+  </style>
+</head>
+<body>
+
+<a href="#main-content" style="position:absolute;left:-9999px;top:auto;width:1px;height:1px;overflow:hidden;z-index:999;background:#0c6570;color:#fff;padding:8px 16px;font-weight:700;" onfocus="this.style.left='0';this.style.width='auto';this.style.height='auto'" onblur="this.style.left='-9999px';this.style.width='1px';this.style.height='1px'">Saltar al contenido principal</a>
+<nav>
+  <div class="nav-inner">
+    <a href="../index.html"><img src="../assets/logo-black.png" width="332" height="256" alt="Skyrock Studio" /></a>
+    <a href="../index.html" class="nav-back">← Volver al sitio</a>
+    <a href="../formulario.html" class="nav-cta">Agendar sesión</a>
+  </div>
+</nav>
+
+<main id="main-content">
+<section class="hero">
+  <div class="hero-noise"></div>
+  <div class="hero-lines"></div>
+  <div class="hero-accent-bar"></div>
+  <div class="hero-content">
+    <p class="service-tag">Servicio 02 — Film & Audio</p>
+    <h1>Audio para<br /><em>Cine &</em><br />Audiovisual</h1>
+    <p class="hero-desc">Skyrock ofrece servicios de diseño sonoro, re-recording mix y postproducción de audio para cine, series y contenido audiovisual.<br /><br />
+    El área está dirigida por <strong style="color:#fff">Juan Camilo Garzón</strong>, Sound Supervisor con experiencia profesional y créditos en largometrajes colombianos y producciones estrenadas en plataformas como Netflix y Amazon Prime.<br /><br />
+    Trabajamos con directores, productoras y equipos creativos para transformar imágenes en experiencias sonoras listas para distribución y exhibición.</p>
+    <div class="hero-ctas">
+      <a href="../formulario.html"><button class="btn-primary">Cotizar proyecto ↗</button></a>
+      <a href="#servicios"><button class="btn-outline">Ver entregables</button></a>
+    </div>
+    <div class="credits-strip">
+      <div class="credit"><p class="credit-title">Perros de Niebla</p><p class="credit-role">Mix Film-Score · Chicamocha Films</p></div>
+      <div class="credit"><p class="credit-title">Me Late Que Sí</p><p class="credit-role">Asistente Ingeniería · Netflix</p></div>
+      <div class="credit"><p class="credit-title">Alix</p><p class="credit-role">Producción Musical · Amazon Prime</p></div>
+      <div class="credit"><p class="credit-title">Oasis</p><p class="credit-role">Sound Design 7.1 · Dome</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="servicios">
+  <div class="container">
+    <p class="label reveal">Qué ofrecemos</p>
+    <h2 class="section-title reveal">Cada imagen merece un <em>sonido a su altura.</em></h2>
+    <div class="deliverables">
+      <div class="del reveal">
+        <div class="del-icon"></div>
+        <h3 class="del-title">Re-recording Mix</h3>
+        <p class="del-desc">Mezcla final de diálogos, música y efectos. Balanceamos cada capa para que el relato fluya sin interrupciones.</p>
+      </div>
+      <div class="del reveal">
+        <div class="del-icon"></div>
+        <h3 class="del-title">Diseño Sonoro</h3>
+        <p class="del-desc">Foley, ambientes, SFX y capas atmosféricas construidas desde cero para el universo de tu proyecto.</p>
+      </div>
+      <div class="del reveal">
+        <div class="del-icon"></div>
+        <h3 class="del-title">Limpieza de Diálogos</h3>
+        <p class="del-desc">ADR, noise reduction y restauración. Convertimos material de campo en audio de broadcast sin artefactos.</p>
+      </div>
+      <div class="del reveal">
+        <div class="del-icon"></div>
+        <h3 class="del-title">Music Supervision</h3>
+        <p class="del-desc">Selección, negociación y edición de música original o licenciada para cada escena. Desde el score hasta el soundtrack.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="formatos">
+  <div class="container">
+    <p class="label reveal">Formatos de entrega</p>
+    <h2 class="section-title reveal">Listos para cualquier <em>plataforma.</em></h2>
+    <div class="formats-grid">
+      <div class="format-tag reveal"><span class="format-dot"></span>Stereo 2.0</div>
+      <div class="format-tag reveal"><span class="format-dot"></span>5.1 Surround</div>
+      <div class="format-tag reveal"><span class="format-dot"></span>7.1 Surround</div>
+      <div class="format-tag reveal"><span class="format-dot"></span>Dolby Atmos</div>
+      <div class="format-tag reveal"><span class="format-dot"></span>Netflix Delivery Spec</div>
+      <div class="format-tag reveal"><span class="format-dot"></span>Amazon Prime Spec</div>
+      <div class="format-tag reveal"><span class="format-dot"></span>Festival DCP</div>
+      <div class="format-tag reveal"><span class="format-dot"></span>Broadcast TV</div>
+      <div class="format-tag reveal"><span class="format-dot"></span>Web / YouTube</div>
+    </div>
+  </div>
+</section>
+
+<section id="cta">
+  <div class="container">
+    <p class="label" style="color:var(--accent)">Siguiente paso</p>
+    <h2 class="section-title">¿Tienes un proyecto <em style="color:var(--accent)">audiovisual?</em></h2>
+    <p>Cuéntanos el formato, la duración y el plazo. Preparamos una propuesta técnica en 24 horas.</p>
+    <a href="../formulario.html"><button class="btn-primary">Cotizar ahora ↗</button></a>
+  </div>
+</section>
+
+</main>
+<footer>
+  <div class="footer-inner">
+    <img src="../assets/logo-black.png" width="332" height="256" alt="Skyrock Studio" />
+    <p>© 2015 Skyrock Studio · Bogotá</p>
+    <a href="../index.html">Volver al sitio principal →</a>
+  </div>
+</footer>
+
+<script>
+  const els = document.querySelectorAll('.reveal');
+  const io = new IntersectionObserver(e => e.forEach(x => { if(x.isIntersecting){ x.target.classList.add('on'); io.unobserve(x.target); } }), { threshold: 0.08 });
+  els.forEach(el => io.observe(el));
+</script>
+</body>
+</html>

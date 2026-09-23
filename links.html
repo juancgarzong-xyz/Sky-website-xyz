@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Skyrock Studio · Links</title>
+  <meta name="description" content="Skyrock Studio Bogotá — Music · Film · Content. Todos nuestros links en un solo lugar." />
+  <link rel="icon" type="image/png" href="assets/logo-white.png" width="332" height="256" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="preload" href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,400;0,700;0,800;0,900;1,300;1,700&family=JetBrains+Mono:wght@400;500&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'" />
+  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,400;0,700;0,800;0,900;1,300;1,700&family=JetBrains+Mono:wght@400;500&display=swap" /></noscript>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --dark: #000000; --fg: #0a0a0a; --bg: #ffffff;
+      --muted: rgba(255,255,255,0.45);
+      --accent: #198d99;
+      --accent-accessible: #0c6570;
+      --border-light: rgba(255,255,255,0.10);
+      --glow: 0 8px 32px -8px rgba(25,141,153,0.5);
+      --sans: 'Montserrat', system-ui, sans-serif;
+      --mono: 'JetBrains Mono', ui-monospace, monospace;
+    }
+    html { background: var(--dark); }
+    body {
+      font-family: var(--sans); color: #fff;
+      -webkit-font-smoothing: antialiased;
+      min-height: 100dvh;
+      display: flex; flex-direction: column; align-items: center;
+      justify-content: center;
+      padding: 3rem 1.5rem;
+      position: relative; overflow-x: hidden;
+    }
+
+    /* BG */
+    .bg-noise { position: fixed; inset: 0; opacity: 0.045; pointer-events: none; z-index: 0;
+      background-image: url("data:image/svg+xml;utf8,<svg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>"); }
+    .bg-glow { position: fixed; top: -30%; left: 50%; transform: translateX(-50%); width: 600px; height: 600px; background: radial-gradient(circle, rgba(25,141,153,0.12) 0%, transparent 70%); pointer-events: none; z-index: 0; }
+    .bg-lines { position: fixed; inset: 0; opacity: 0.05; pointer-events: none; z-index: 0;
+      background-image: linear-gradient(to right, rgba(255,255,255,0.2) 1px, transparent 1px);
+      background-size: 64px 100%; }
+
+    /* CONTENT */
+    .wrap { position: relative; z-index: 1; width: 100%; max-width: 440px; display: flex; flex-direction: column; align-items: center; gap: 0; }
+
+    /* HEADER */
+    .header { text-align: center; margin-bottom: 2.5rem; }
+    .logo { height: 80px; width: auto; margin-bottom: 1.5rem; }
+    .tagline { font-family: var(--mono); font-size: 9px; text-transform: uppercase; letter-spacing: 0.45em; color: var(--accent); margin-bottom: 0.75rem; }
+    .location { font-family: var(--mono); font-size: 9px; text-transform: uppercase; letter-spacing: 0.3em; color: var(--muted); }
+
+    /* WAVE */
+    .wave { display: flex; align-items: flex-end; gap: 3px; height: 14px; justify-content: center; margin: 1.25rem auto; }
+    .wave-bar { width: 2px; background: var(--accent); transform-origin: bottom; animation: wave 1.4s ease-in-out infinite; }
+    @keyframes wave { 0%,100%{ transform:scaleY(0.3); } 50%{ transform:scaleY(1); } }
+
+    /* LINKS */
+    .links { width: 100%; display: flex; flex-direction: column; gap: 12px; margin-bottom: 2rem; }
+
+    .link-card {
+      display: flex; align-items: center; gap: 1rem;
+      border: 1px solid var(--border-light);
+      padding: 1rem 1.25rem;
+      text-decoration: none; color: #fff;
+      transition: all 0.25s cubic-bezier(0.16,1,0.3,1);
+      position: relative; overflow: hidden;
+      background: rgba(255,255,255,0.03);
+    }
+    .link-card::before {
+      content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 3px;
+      background: var(--accent); transform: scaleY(0); transform-origin: center;
+      transition: transform 0.25s cubic-bezier(0.16,1,0.3,1);
+    }
+    .link-card:hover { border-color: rgba(25,141,153,0.5); background: rgba(25,141,153,0.07); transform: translateX(4px); box-shadow: var(--glow); }
+    .link-card:hover::before { transform: scaleY(1); }
+
+    .link-card.primary { border-color: var(--accent); background: rgba(25,141,153,0.10); }
+    .link-card.primary::before { transform: scaleY(1); }
+
+    .link-icon { width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; border: 1px solid rgba(255,255,255,0.1); }
+    .link-card.primary .link-icon { border-color: rgba(25,141,153,0.4); background: rgba(25,141,153,0.1); }
+    .link-icon svg { width: 18px; height: 18px; }
+    .link-icon img { width: 20px; height: 20px; object-fit: contain; filter: brightness(0) invert(1); }
+
+    .link-body { flex: 1; }
+    .link-label { font-family: var(--mono); font-size: 9px; text-transform: uppercase; letter-spacing: 0.3em; color: var(--accent); margin-bottom: 3px; }
+    .link-title { font-size: 14px; font-weight: 700; letter-spacing: -0.01em; }
+    .link-desc { font-size: 11px; color: var(--muted); margin-top: 2px; }
+
+    .link-arrow { color: var(--accent); font-size: 16px; opacity: 0; transition: opacity 0.2s, transform 0.2s; }
+    .link-card:hover .link-arrow { opacity: 1; transform: translateX(4px); }
+
+    /* DIVIDER */
+    .divider { width: 100%; display: flex; align-items: center; gap: 1rem; margin: 0.5rem 0; }
+    .divider-line { flex: 1; height: 1px; background: var(--border-light); }
+    .divider-text { font-family: var(--mono); font-size: 8px; text-transform: uppercase; letter-spacing: 0.4em; color: var(--muted); }
+
+    /* FOOTER */
+    .footer { text-align: center; margin-top: 1.5rem; }
+    .footer p { font-family: var(--mono); font-size: 8px; text-transform: uppercase; letter-spacing: 0.35em; color: rgba(255,255,255,0.25); margin-bottom: 6px; }
+    .footer a { font-family: var(--mono); font-size: 8px; text-transform: uppercase; letter-spacing: 0.3em; color: rgba(25,141,153,0.6); transition: color 0.2s; }
+    .footer a:hover { color: var(--accent); }
+
+    /* ANIMATE IN */
+    .link-card { animation: slide-in 0.5s cubic-bezier(0.16,1,0.3,1) both; }
+    .link-card:nth-child(1){ animation-delay: 0.05s; }
+    .link-card:nth-child(2){ animation-delay: 0.10s; }
+    .link-card:nth-child(3){ animation-delay: 0.15s; }
+    .link-card:nth-child(4){ animation-delay: 0.20s; }
+    .link-card:nth-child(5){ animation-delay: 0.25s; }
+    .link-card:nth-child(6){ animation-delay: 0.30s; }
+    @keyframes slide-in { from{ opacity:0; transform:translateY(12px); } to{ opacity:1; transform:translateY(0); } }
+    @media(prefers-reduced-motion:reduce){ .link-card{ animation:none; } }
+  </style>
+</head>
+<body>
+
+<div class="bg-noise"></div>
+<div class="bg-glow"></div>
+<div class="bg-lines"></div>
+
+<div class="wrap">
+
+  <!-- HEADER -->
+  <div class="header">
+    <img src="assets/logo-white.png" width="640" height="493" alt="Skyrock Studio" class="logo" />
+    <p class="tagline">Music · Film · Content</p>
+    <div class="wave" aria-hidden="true">
+      <div class="wave-bar" style="height:6px;animation-delay:0s"></div>
+      <div class="wave-bar" style="height:10px;animation-delay:0.1s"></div>
+      <div class="wave-bar" style="height:14px;animation-delay:0.2s"></div>
+      <div class="wave-bar" style="height:10px;animation-delay:0.3s"></div>
+      <div class="wave-bar" style="height:6px;animation-delay:0.4s"></div>
+    </div>
+    <p class="location">Bogotá · Colombia · Since 2015</p>
+  </div>
+
+  <!-- LINKS -->
+  <div class="links">
+
+    <!-- CTA principal -->
+    <a href="formulario.html" class="link-card primary">
+      <div class="link-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" color="#198d99"><path stroke-linecap="round" stroke-linejoin="round" d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 012.25-2.25h13.5A2.25 2.25 0 0121 7.5v11.25m-18 0A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75m-18 0v-7.5A2.25 2.25 0 015.25 9h13.5A2.25 2.25 0 0121 11.25v7.5"/></svg>
+      </div>
+      <div class="link-body">
+        <p class="link-label">Agendar</p>
+        <p class="link-title">Reservar sesión en el estudio</p>
+        <p class="link-desc">Respondemos en menos de 24 horas</p>
+      </div>
+      <span class="link-arrow">↗</span>
+    </a>
+
+    <!-- Sitio web -->
+    <a href="index.html" class="link-card">
+      <div class="link-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M12 21a9.004 9.004 0 008.716-6.747M12 21a9.004 9.004 0 01-8.716-6.747M12 21c2.485 0 4.5-4.03 4.5-9S14.485 3 12 3m0 18c-2.485 0-4.5-4.03-4.5-9S9.515 3 12 3m0 0a8.997 8.997 0 017.843 4.582M12 3a8.997 8.997 0 00-7.843 4.582m15.686 0A11.953 11.953 0 0112 10.5c-2.998 0-5.74-1.1-7.843-2.918m15.686 0A8.959 8.959 0 0121 12c0 .778-.099 1.533-.284 2.253M3 12a8.96 8.96 0 00.284 2.253"/></svg>
+      </div>
+      <div class="link-body">
+        <p class="link-label">Sitio web</p>
+        <p class="link-title">sky-rock.co</p>
+        <p class="link-desc">Portafolio, servicios y más</p>
+      </div>
+      <span class="link-arrow">↗</span>
+    </a>
+
+    <div class="divider">
+      <div class="divider-line"></div>
+      <span class="divider-text">Redes sociales</span>
+      <div class="divider-line"></div>
+    </div>
+
+    <!-- Instagram -->
+    <a href="https://instagram.com/skyrock_co" target="_blank" rel="noopener" class="link-card">
+      <div class="link-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.5"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+      </div>
+      <div class="link-body">
+        <p class="link-label">Instagram</p>
+        <p class="link-title">@skyrock_co</p>
+        <p class="link-desc">Behind the scenes y proyectos</p>
+      </div>
+      <span class="link-arrow">↗</span>
+    </a>
+
+    <!-- TikTok -->
+    <a href="https://tiktok.com/@skyrock_co" target="_blank" rel="noopener" class="link-card">
+      <div class="link-icon">
+        <svg viewBox="0 0 24 24" fill="white" xmlns="http://www.w3.org/2000/svg"><path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-2.88 2.5 2.89 2.89 0 01-2.89-2.89 2.89 2.89 0 012.89-2.89c.28 0 .54.04.79.1V9.01a6.28 6.28 0 00-.79-.05 6.34 6.34 0 00-6.34 6.34 6.34 6.34 0 006.34 6.34 6.34 6.34 0 006.33-6.34V8.69a8.18 8.18 0 004.78 1.52V6.79a4.85 4.85 0 01-1.01-.1z"/></svg>
+      </div>
+      <div class="link-body">
+        <p class="link-label">TikTok</p>
+        <p class="link-title">@skyrock_co</p>
+        <p class="link-desc">Contenido y proceso creativo</p>
+      </div>
+      <span class="link-arrow">↗</span>
+    </a>
+
+  </div>
+
+  <!-- FOOTER -->
+  <div class="footer">
+    <p>© 2015 Skyrock Studio · Bogotá, Colombia</p>
+  </div>
+
+</div>
+</body>
+</html>
