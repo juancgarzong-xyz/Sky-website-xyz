@@ -157,6 +157,15 @@
     .footer-inner p { font-family: var(--mono); font-size: 9px; text-transform: uppercase; letter-spacing: 0.3em; color: var(--muted); }
     .footer-inner a { font-family: var(--mono); font-size: 9px; text-transform: uppercase; letter-spacing: 0.3em; color: var(--accent); }
 
+    /* CALENDLY */
+    .calendly-btn { display: block; text-align: center; padding: 14px; font-size: 13px; font-weight: 700; transition: all 0.2s; cursor: pointer; border: none; font-family: var(--sans); background: var(--fg); color: #fff; }
+    .calendly-btn:hover { background: var(--accent); }
+    .plan.featured .calendly-btn { background: var(--accent); color: #fff; }
+    .plan.featured .calendly-btn:hover { opacity: 0.85; }
+    /* Calendly embed */
+    .calendly-section { background: var(--surface); padding: 6rem 2rem; }
+    .calendly-wrap { max-width: 900px; margin: 0 auto; }
+    .calendly-inline-widget { min-width: 320px; height: 700px; border: none; }
     /* REVEAL */
     .reveal { opacity:0; transform:translateY(16px); transition: opacity 0.7s cubic-bezier(0.16,1,0.3,1), transform 0.7s cubic-bezier(0.16,1,0.3,1); }
     .reveal.on { opacity:1; transform:translateY(0); }
@@ -191,11 +200,14 @@
   <div class="hero-noise"></div>
   <div class="hero-grid-bg"></div>
   <div class="hero-content">
-    <p class="service-tag">Content Capture — Producción Recurrente</p>
+    <p class="service-tag">Producción de Contenido — Producción Recurrente</p>
     <h1>Grabamos.<br /><em>Realizamos.</em><br />Entregamos.</h1>
     <p class="hero-desc">Producción audiovisual integral para proyectos que publican con frecuencia. Multicámara, sonido profesional y realización en vivo — todo en una misma jornada, listo para publicar.</p>
     <div class="hero-ctas">
-      <a href="../formulario.html"><button class="btn-primary">Solicitar propuesta →</button></a>
+      <div style="display:flex;flex-wrap:wrap;gap:1rem;justify-content:center;">
+      <button class="btn-primary" onclick="Calendly.initPopupWidget({url:'https://calendly.com/skyrock-co/30min'});return false;">Agendar llamada →</button>
+      <a href="../formulario.html"><button class="btn-outline" style="color:rgba(255,255,255,0.8);border:1px solid rgba(255,255,255,0.25);">Enviar mensaje →</button></a>
+    </div>
       <a href="#planes"><button class="btn-outline">Ver planes</button></a>
     </div>
     <div class="hero-badges">
@@ -222,9 +234,7 @@
         </div>
         <h3 class="include-title">Producción de Video</h3>
         <ul class="include-list">
-          <li>Sony PXW-X70 (cámara principal)</li>
-          <li>GoPro HERO 10 Black</li>
-          <li>GoPro HERO 4</li>
+          <li>3 cámaras con resolución 1080p</li>
           <li>2 cámaras fijas + 1 operada</li>
           <li>Realización multicámara en vivo</li>
           <li>Grabación master en OBS</li>
@@ -240,10 +250,10 @@
         <h3 class="include-title">Producción de Sonido</h3>
         <ul class="include-list">
           <li>Técnico de sonido profesional</li>
-          <li>Consola Allen &amp; Heath SQ-5</li>
+          <li>Consola de sonido profesional</li>
           <li>Hasta 8 micrófonos simultáneos</li>
           <li>Grabación multitrack</li>
-          <li>Integración SQ-5 con Pro Tools</li>
+          <li>Grabación en software de audio multitrack</li>
           <li>Mezcla estéreo en vivo</li>
           <li>Audio estéreo en master final</li>
         </ul>
@@ -289,12 +299,12 @@
             <span class="tl-desc"><strong>Inicio de jornada</strong> — Montaje de equipos, prueba de sonido y video, configuración de set.</span>
           </li>
           <li>
-            <span class="tl-time">10:30 AM</span>
-            <span class="tl-desc"><strong>Pausa operativa</strong> — Revisión de material grabado y ajustes técnicos.</span>
+            <span class="tl-time">10:00 AM</span>
+            <span class="tl-desc"><strong>Producción episodio 1</strong> — Grabación, realización multicámara en vivo y mezcla de sonido.</span>
           </li>
           <li>
-            <span class="tl-time">11:00 AM</span>
-            <span class="tl-desc"><strong>Producción episodio 1</strong> — Grabación, realización multicámara en vivo y mezcla de sonido.</span>
+            <span class="tl-time">12:00 PM</span>
+            <span class="tl-desc"><strong>Pausa</strong> — Revisión de material y ajustes técnicos entre episodios.</span>
           </li>
           <li>
             <span class="tl-time">1:00 PM</span>
@@ -305,8 +315,8 @@
             <span class="tl-desc"><strong>Producción episodio 2</strong> — Segunda grabación, realización y ajustes de producción.</span>
           </li>
           <li>
-            <span class="tl-time">4:30 PM</span>
-            <span class="tl-desc"><strong>Pausa operativa</strong> — Revisión y descarga de material.</span>
+            <span class="tl-time">4:00 PM</span>
+            <span class="tl-desc"><strong>Pausa</strong> — Revisión y descarga de material.</span>
           </li>
           <li>
             <span class="tl-time">5:00 PM</span>
@@ -331,8 +341,8 @@
         <h3 class="plan-title">4 episodios / mes</h3>
         <p class="plan-tagline">Para proyectos que buscan establecer una frecuencia constante de publicación con operación audiovisual profesional.</p>
         <div class="plan-price">
-          <p class="plan-price-amount">$5.700.000</p>
-          <p class="plan-price-period">COP · mensual</p>
+          <p style="font-family:var(--mono);font-size:10px;text-transform:uppercase;letter-spacing:0.3em;color:var(--accent-accessible);">Inversión a medida</p>
+          <p style="font-size:13px;color:var(--muted);margin-top:6px;line-height:1.5;">Agenda una llamada y definimos juntos la propuesta que mejor se ajuste a tu proyecto.</p>
         </div>
         <div class="plan-stats">
           <div>
@@ -357,7 +367,7 @@
           <li>Transporte dentro de Bogotá</li>
           <li>2 rondas de cambios</li>
         </ul>
-        <a href="../formulario.html"><button class="plan-cta plan-cta-dark">Solicitar propuesta →</button></a>
+        <button class="calendly-btn" onclick="Calendly.initPopupWidget({url:'https://calendly.com/skyrock-co/30min'});return false;">Agendar llamada →</button>
       </div>
 
       <!-- SERIES -->
@@ -387,7 +397,7 @@
           <li>Organización de temporada</li>
           <li>2 rondas de cambios</li>
         </ul>
-        <a href="../formulario.html"><button class="plan-cta plan-cta-accent">Solicitar propuesta →</button></a>
+        <button class="calendly-btn" onclick="Calendly.initPopupWidget({url:'https://calendly.com/skyrock-co/30min'});return false;">Agendar llamada →</button>
       </div>
 
       <!-- BRAND -->
@@ -396,8 +406,8 @@
         <h3 class="plan-title">16 episodios / mes</h3>
         <p class="plan-tagline">Para marcas, organizaciones y proyectos que necesitan generar contenido audiovisual de manera continua y escalable.</p>
         <div class="plan-price">
-          <p class="plan-price-amount">$20.000.000</p>
-          <p class="plan-price-period">COP · mensual</p>
+          <p style="font-family:var(--mono);font-size:10px;text-transform:uppercase;letter-spacing:0.3em;color:var(--accent-accessible);">Inversión a medida</p>
+          <p style="font-size:13px;color:var(--muted);margin-top:6px;line-height:1.5;">Agenda una llamada y definimos juntos la propuesta que mejor se ajuste a tu proyecto.</p>
         </div>
         <div class="plan-stats">
           <div>
@@ -416,7 +426,7 @@
           <li>Estructuración de archivos y entregables</li>
           <li>2 rondas de cambios</li>
         </ul>
-        <a href="../formulario.html"><button class="plan-cta plan-cta-dark">Solicitar propuesta →</button></a>
+        <button class="calendly-btn" onclick="Calendly.initPopupWidget({url:'https://calendly.com/skyrock-co/30min'});return false;">Agendar llamada →</button>
       </div>
 
     </div>
@@ -429,16 +439,31 @@
             <th>Plan</th>
             <th>Episodios / mes</th>
             <th>Jornadas / mes</th>
-            <th>Inversión mensual</th>
           </tr>
         </thead>
         <tbody>
-          <tr><td>Session</td><td>4</td><td>2</td><td>$5.700.000 COP</td></tr>
-          <tr><td>Series</td><td>8</td><td>4</td><td>$10.800.000 COP</td></tr>
-          <tr><td>Brand</td><td>16</td><td>8</td><td>$20.000.000 COP</td></tr>
+          <tr><td>Session</td><td>4</td><td>2</td></tr>
+          <tr><td>Series</td><td>8</td><td>4</td></tr>
+          <tr><td>Brand</td><td>16</td><td>8</td></tr>
         </tbody>
       </table>
-      <p style="font-size:11px;color:var(--muted);margin-top:1rem;font-family:var(--mono);">* Valores en pesos colombianos (COP). La propuesta podrá ajustarse según características técnicas, duración, ubicación y requerimientos particulares del proyecto.</p>
+      <p style="font-size:11px;color:var(--muted);margin-top:1rem;font-family:var(--mono);">* La propuesta se ajusta según características técnicas, duración, ubicación y requerimientos del proyecto. Agenda una llamada para recibir tu cotización personalizada.</p>
+    </div>
+  </div>
+</section>
+
+
+<!-- CALENDLY EMBED -->
+<section class="calendly-section" id="agenda">
+  <div class="container">
+    <p class="label reveal">Agenda tu llamada</p>
+    <h2 class="section-title reveal">Hablemos antes de<br /><em>empezar a grabar.</em></h2>
+    <p class="reveal" style="color:var(--muted);font-size:15px;line-height:1.75;max-width:560px;margin-bottom:3rem;">
+      En 30 minutos definimos el plan que mejor se ajusta a tu proyecto, frecuencia de publicación y presupuesto. Sin compromisos.
+    </p>
+    <div class="calendly-wrap reveal">
+      <!-- Widget inline de Calendly — reemplaza TULINK por tu enlace -->
+      <div class="calendly-inline-widget" data-url="https://calendly.com/skyrock-co/30min?hide_event_type_details=1&hide_gdpr_banner=1&primary_color=198d99" style="min-width:320px;height:700px;"></div>
     </div>
   </div>
 </section>
@@ -525,7 +550,10 @@
     <p class="label" style="color:var(--accent);text-align:center;">Siguiente paso</p>
     <h2 class="section-title" style="color:#fff;">¿Listo para producir<br /><em style="color:var(--accent)">con frecuencia?</em></h2>
     <p>Cuéntanos tu proyecto. Respondemos en menos de 24 horas con una propuesta ajustada a tus necesidades.</p>
-    <a href="../formulario.html"><button class="btn-primary">Solicitar propuesta →</button></a>
+    <div style="display:flex;flex-wrap:wrap;gap:1rem;justify-content:center;">
+      <button class="btn-primary" onclick="Calendly.initPopupWidget({url:'https://calendly.com/skyrock-co/30min'});return false;">Agendar llamada →</button>
+      <a href="../formulario.html"><button class="btn-outline" style="color:rgba(255,255,255,0.8);border:1px solid rgba(255,255,255,0.25);">Enviar mensaje →</button></a>
+    </div>
   </div>
 </section>
 
@@ -546,5 +574,7 @@
   }), { threshold: 0.07 });
   els.forEach(el => io.observe(el));
 </script>
+<link href="https://assets.calendly.com/assets/external/widget.css" rel="stylesheet" />
+<script src="https://assets.calendly.com/assets/external/widget.js" type="text/javascript" async></script>
 </body>
 </html>
