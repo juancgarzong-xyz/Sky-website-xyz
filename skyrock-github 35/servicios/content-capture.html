@@ -1,0 +1,550 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Producción de Contenido · Skyrock Studio Bogotá</title>
+  <meta name="description" content="Producción audiovisual recurrente en Bogotá. Multicámara, sonido profesional, realización en vivo y entrega lista para publicar. Planes SESSION, SERIES y BRAND." />
+  <link rel="icon" type="image/png" href="../assets/logo-white.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="preload" href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,400;0,600;0,700;0,800;0,900;1,300;1,700&family=JetBrains+Mono:wght@400;500&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'" />
+  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,400;0,600;0,700;0,800;0,900;1,300;1,700&family=JetBrains+Mono:wght@400;500&display=swap" /></noscript>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --bg: #ffffff; --dark: #000000; --fg: #0a0a0a;
+      --muted: #666666; --accent: #198d99; --accent-accessible: #0c6570;
+      --surface: #f4f4f4; --border: rgba(10,10,10,0.10);
+      --glow: 0 10px 40px -12px rgba(25,141,153,0.4);
+      --sans: 'Montserrat', system-ui, sans-serif;
+      --mono: 'JetBrains Mono', ui-monospace, monospace;
+    }
+    html { scroll-behavior: smooth; background: var(--bg); }
+    body { font-family: var(--sans); color: var(--fg); -webkit-font-smoothing: antialiased; overflow-x: hidden; }
+    a { text-decoration: none; color: inherit; }
+
+    /* NAV */
+    nav { position: fixed; top: 0; left: 0; right: 0; z-index: 50; background: rgba(255,255,255,0.95); backdrop-filter: blur(12px); border-bottom: 1px solid var(--border); }
+    .nav-inner { max-width: 1200px; margin: 0 auto; padding: 0 2rem; height: 68px; display: flex; align-items: center; justify-content: space-between; }
+    .nav-inner a img { height: 38px; width: auto; }
+    .nav-back { font-family: var(--mono); font-size: 10px; letter-spacing: 0.3em; text-transform: uppercase; color: var(--muted); transition: color 0.2s; }
+    .nav-back:hover { color: var(--accent); }
+    .nav-cta { background: var(--accent); color: #fff; padding: 10px 22px; min-height: 44px; display: inline-flex; align-items: center; font-size: 12px; font-weight: 700; letter-spacing: 0.05em; transition: opacity 0.2s; }
+    .nav-cta:hover { opacity: 0.85; }
+
+    /* HERO */
+    .hero { min-height: 100dvh; background: var(--dark); color: #fff; display: flex; flex-direction: column; justify-content: flex-end; padding: 0 2rem 5rem; position: relative; overflow: hidden; padding-top: 68px; }
+    .hero-noise { position: absolute; inset: 0; opacity: 0.04; background-image: url("data:image/svg+xml;utf8,<svg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>"); pointer-events: none; }
+    .hero-grid-bg { position: absolute; inset: 0; opacity: 0.05; pointer-events: none; background-image: linear-gradient(rgba(255,255,255,0.15) 1px, transparent 1px), linear-gradient(to right, rgba(255,255,255,0.15) 1px, transparent 1px); background-size: 60px 60px; }
+    .hero-content { max-width: 1200px; margin: 0 auto; width: 100%; position: relative; z-index: 2; }
+    .service-tag { font-family: var(--mono); font-size: 10px; letter-spacing: 0.45em; text-transform: uppercase; color: var(--accent); margin-bottom: 2rem; display: flex; align-items: center; gap: 12px; }
+    .service-tag::before { content: ''; display: block; width: 32px; height: 1px; background: var(--accent); }
+    h1 { font-size: clamp(3rem, 9vw, 7.5rem); font-weight: 800; letter-spacing: -0.04em; line-height: 0.9; margin-bottom: 2rem; }
+    h1 em { font-style: italic; font-weight: 300; color: var(--accent); }
+    .hero-desc { font-size: clamp(1rem, 1.8vw, 1.15rem); color: rgba(255,255,255,0.65); max-width: 640px; line-height: 1.75; margin-bottom: 3rem; }
+    .hero-ctas { display: flex; flex-wrap: wrap; gap: 1rem; margin-bottom: 3.5rem; }
+    .btn-primary { display: inline-flex; align-items: center; gap: 8px; background: #fff; color: var(--fg); padding: 14px 28px; font-weight: 700; font-size: 13px; border: none; cursor: pointer; transition: all 0.2s; font-family: var(--sans); }
+    .btn-primary:hover { background: var(--accent); color: #fff; box-shadow: var(--glow); }
+    .btn-outline { display: inline-flex; align-items: center; gap: 8px; background: transparent; color: rgba(255,255,255,0.8); padding: 14px 28px; font-weight: 600; font-size: 13px; border: 1px solid rgba(255,255,255,0.25); cursor: pointer; transition: all 0.2s; font-family: var(--sans); }
+    .btn-outline:hover { border-color: var(--accent); color: var(--accent); }
+    .hero-badges { display: flex; flex-wrap: wrap; gap: 0.75rem; padding-top: 2.5rem; border-top: 1px solid rgba(255,255,255,0.1); }
+    .badge { border: 1px solid rgba(25,141,153,0.4); padding: 6px 14px; font-family: var(--mono); font-size: 9px; text-transform: uppercase; letter-spacing: 0.3em; color: var(--accent); }
+
+    /* SECTIONS */
+    section { padding: 6rem 2rem; }
+    .container { max-width: 1200px; margin: 0 auto; }
+    .label { font-family: var(--mono); font-size: 10px; text-transform: uppercase; letter-spacing: 0.4em; color: var(--accent-accessible); margin-bottom: 1rem; }
+    .section-title { font-size: clamp(2rem, 4vw, 3.2rem); font-weight: 800; letter-spacing: -0.04em; line-height: 1; margin-bottom: 1.5rem; }
+    .section-title em { font-style: italic; font-weight: 300; color: var(--accent); }
+
+    /* WHAT'S INCLUDED */
+    #incluye { background: var(--surface); }
+    .includes-grid { display: grid; gap: 1px; background: var(--border); margin-top: 3rem; }
+    @media(min-width:768px){ .includes-grid { grid-template-columns: repeat(2,1fr); } }
+    @media(min-width:1024px){ .includes-grid { grid-template-columns: repeat(3,1fr); } }
+    .include-card { background: var(--bg); padding: 2.5rem; transition: background 0.3s; }
+    .include-card:hover { background: #ececec; }
+    .include-icon { width: 40px; height: 40px; border: 1px solid rgba(25,141,153,0.3); display: flex; align-items: center; justify-content: center; margin-bottom: 1.5rem; }
+    .include-icon svg { width: 18px; height: 18px; color: var(--accent); }
+    .include-title { font-size: 1rem; font-weight: 700; letter-spacing: -0.02em; margin-bottom: 0.75rem; }
+    .include-list { list-style: none; }
+    .include-list li { font-size: 13px; color: var(--muted); padding: 5px 0; display: flex; gap: 10px; align-items: flex-start; border-bottom: 1px solid var(--border); }
+    .include-list li:last-child { border-bottom: none; }
+    .include-list li::before { content: ''; display: block; width: 10px; height: 1px; background: var(--accent); margin-top: 9px; flex-shrink: 0; }
+
+    /* JORNADA */
+    #jornada { background: var(--dark); color: #fff; }
+    .jornada-grid { display: grid; gap: 4rem; margin-top: 3rem; }
+    @media(min-width:1024px){ .jornada-grid { grid-template-columns: 1fr 1fr; } }
+    .jornada-label { color: var(--accent); }
+    .jornada-time { font-size: clamp(2.5rem, 5vw, 4rem); font-weight: 800; letter-spacing: -0.04em; color: #fff; margin: 0.5rem 0; }
+    .jornada-desc { font-size: 15px; color: rgba(255,255,255,0.55); line-height: 1.75; max-width: 480px; }
+    .timeline { list-style: none; margin-top: 2rem; }
+    .timeline li { display: flex; gap: 1.5rem; padding: 1rem 0; border-bottom: 1px solid rgba(255,255,255,0.07); }
+    .timeline li:last-child { border-bottom: none; }
+    .tl-time { font-family: var(--mono); font-size: 10px; letter-spacing: 0.2em; color: var(--accent); flex-shrink: 0; width: 70px; padding-top: 2px; }
+    .tl-desc { font-size: 13px; color: rgba(255,255,255,0.6); line-height: 1.5; }
+    .tl-desc strong { color: #fff; }
+    .jornada-stat { background: var(--accent); padding: 2.5rem; margin-top: 2rem; }
+    .jornada-stat-num { font-size: 3.5rem; font-weight: 800; letter-spacing: -0.04em; color: #fff; line-height: 1; }
+    .jornada-stat-label { font-family: var(--mono); font-size: 10px; text-transform: uppercase; letter-spacing: 0.3em; color: rgba(255,255,255,0.7); margin-top: 8px; }
+
+    /* PLANES */
+    #planes { background: var(--bg); }
+    .planes-grid { display: grid; gap: 2px; background: var(--border); margin-top: 3.5rem; }
+    @media(min-width:768px){ .planes-grid { grid-template-columns: repeat(3,1fr); } }
+    .plan { background: var(--bg); padding: 2.5rem; display: flex; flex-direction: column; position: relative; transition: background 0.3s; }
+    .plan.featured { background: var(--dark); color: #fff; }
+    .plan:hover:not(.featured) { background: var(--surface); }
+    .plan-badge { position: absolute; top: -12px; left: 2rem; background: var(--accent); color: #fff; font-family: var(--mono); font-size: 9px; text-transform: uppercase; letter-spacing: 0.3em; padding: 4px 12px; }
+    .plan-name { font-family: var(--mono); font-size: 10px; text-transform: uppercase; letter-spacing: 0.4em; color: var(--accent); margin-bottom: 0.5rem; }
+    .plan-title { font-size: 1.8rem; font-weight: 800; letter-spacing: -0.04em; margin-bottom: 0.5rem; }
+    .plan.featured .plan-title { color: #fff; }
+    .plan-tagline { font-size: 13px; color: var(--muted); margin-bottom: 2rem; line-height: 1.5; }
+    .plan.featured .plan-tagline { color: rgba(255,255,255,0.5); }
+    .plan-price { margin-bottom: 2rem; }
+    .plan-price-amount { font-size: 2.2rem; font-weight: 800; letter-spacing: -0.04em; color: var(--fg); line-height: 1; }
+    .plan.featured .plan-price-amount { color: #fff; }
+    .plan-price-period { font-family: var(--mono); font-size: 9px; text-transform: uppercase; letter-spacing: 0.3em; color: var(--muted); margin-top: 4px; }
+    .plan.featured .plan-price-period { color: rgba(255,255,255,0.4); }
+    .plan-stats { display: flex; gap: 2rem; margin-bottom: 2rem; padding-bottom: 2rem; border-bottom: 1px solid var(--border); }
+    .plan.featured .plan-stats { border-bottom-color: rgba(255,255,255,0.1); }
+    .plan-stat-num { font-size: 1.5rem; font-weight: 800; letter-spacing: -0.03em; }
+    .plan.featured .plan-stat-num { color: #fff; }
+    .plan-stat-label { font-family: var(--mono); font-size: 8px; text-transform: uppercase; letter-spacing: 0.2em; color: var(--muted); margin-top: 2px; }
+    .plan.featured .plan-stat-label { color: rgba(255,255,255,0.4); }
+    .plan-list { list-style: none; flex: 1; margin-bottom: 2rem; }
+    .plan-list li { font-size: 13px; padding: 7px 0; display: flex; gap: 10px; align-items: flex-start; border-bottom: 1px solid var(--border); color: var(--muted); }
+    .plan.featured .plan-list li { color: rgba(255,255,255,0.55); border-bottom-color: rgba(255,255,255,0.07); }
+    .plan-list li:last-child { border-bottom: none; }
+    .plan-list li::before { content: '✓'; color: var(--accent); font-weight: 700; flex-shrink: 0; font-size: 11px; margin-top: 1px; }
+    .plan-cta { display: block; text-align: center; padding: 14px; font-size: 13px; font-weight: 700; transition: all 0.2s; cursor: pointer; border: none; font-family: var(--sans); }
+    .plan-cta-dark { background: var(--fg); color: #fff; }
+    .plan-cta-dark:hover { background: var(--accent); }
+    .plan-cta-accent { background: var(--accent); color: #fff; }
+    .plan-cta-accent:hover { opacity: 0.85; }
+
+    /* ADICIONALES */
+    #adicionales { background: var(--surface); }
+    .adicionales-grid { display: grid; gap: 1px; background: var(--border); margin-top: 3rem; }
+    @media(min-width:640px){ .adicionales-grid { grid-template-columns: repeat(2,1fr); } }
+    @media(min-width:1024px){ .adicionales-grid { grid-template-columns: repeat(4,1fr); } }
+    .adicional { background: var(--bg); padding: 1.75rem; transition: background 0.3s; }
+    .adicional:hover { background: #ececec; }
+    .adicional-emoji { font-size: 1.4rem; margin-bottom: 0.75rem; display: block; }
+    .adicional-title { font-size: 13px; font-weight: 700; letter-spacing: -0.01em; margin-bottom: 6px; }
+    .adicional-desc { font-size: 12px; color: var(--muted); line-height: 1.6; }
+
+    /* CONDICIONES */
+    #condiciones { background: var(--bg); }
+    .condiciones-grid { display: grid; gap: 2rem; margin-top: 3rem; }
+    @media(min-width:768px){ .condiciones-grid { grid-template-columns: repeat(2,1fr); } }
+    .condicion { border-left: 2px solid var(--border); padding-left: 1.5rem; }
+    .condicion.highlight { border-left-color: var(--accent); }
+    .condicion-title { font-size: 14px; font-weight: 700; letter-spacing: -0.01em; margin-bottom: 6px; }
+    .condicion-desc { font-size: 13px; color: var(--muted); line-height: 1.7; }
+
+    /* CTA */
+    #cta { background: var(--dark); color: #fff; text-align: center; }
+    #cta .section-title { color: #fff; }
+    #cta p { color: rgba(255,255,255,0.5); max-width: 500px; margin: 1.5rem auto 2.5rem; line-height: 1.75; font-size: 15px; }
+
+    /* FOOTER */
+    footer { background: var(--bg); border-top: 1px solid var(--border); padding: 2rem; }
+    .footer-inner { max-width: 1200px; margin: 0 auto; display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 1rem; }
+    .footer-inner img { height: 36px; width: auto; }
+    .footer-inner p { font-family: var(--mono); font-size: 9px; text-transform: uppercase; letter-spacing: 0.3em; color: var(--muted); }
+    .footer-inner a { font-family: var(--mono); font-size: 9px; text-transform: uppercase; letter-spacing: 0.3em; color: var(--accent); }
+
+    /* REVEAL */
+    .reveal { opacity:0; transform:translateY(16px); transition: opacity 0.7s cubic-bezier(0.16,1,0.3,1), transform 0.7s cubic-bezier(0.16,1,0.3,1); }
+    .reveal.on { opacity:1; transform:translateY(0); }
+    @media(prefers-reduced-motion:reduce){ .reveal{ opacity:1; transform:none; transition:none; } }
+
+    /* TABLE */
+    .resumen-table { width: 100%; border-collapse: collapse; margin-top: 3rem; }
+    .resumen-table th { font-family: var(--mono); font-size: 9px; text-transform: uppercase; letter-spacing: 0.3em; color: var(--accent-accessible); padding: 12px 16px; text-align: left; border-bottom: 2px solid var(--accent); }
+    .resumen-table td { padding: 14px 16px; font-size: 14px; border-bottom: 1px solid var(--border); }
+    .resumen-table tr:last-child td { border-bottom: none; }
+    .resumen-table tr:nth-child(even) td { background: var(--surface); }
+    .resumen-table td:first-child { font-weight: 700; }
+    .resumen-table td:last-child { font-weight: 800; color: var(--fg); }
+  </style>
+</head>
+<body>
+
+<a href="#main-content" style="position:absolute;left:-9999px;top:auto;width:1px;height:1px;overflow:hidden;z-index:999;background:#0c6570;color:#fff;padding:8px 16px;font-weight:700;" onfocus="this.style.left='0';this.style.width='auto';this.style.height='auto'" onblur="this.style.left='-9999px';this.style.width='1px';this.style.height='1px'">Saltar al contenido principal</a>
+
+<nav>
+  <div class="nav-inner">
+    <a href="../index.html"><picture><source srcset="../assets/logo-black.webp" type="image/webp" /><img src="../assets/logo-black.png" alt="Skyrock Studio" width="332" height="256" /></picture></a>
+    <a href="../index.html" class="nav-back">← Volver al sitio</a>
+    <a href="../formulario.html" class="nav-cta">Solicitar propuesta</a>
+  </div>
+</nav>
+
+<main id="main-content">
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-noise"></div>
+  <div class="hero-grid-bg"></div>
+  <div class="hero-content">
+    <p class="service-tag">Content Capture — Producción Recurrente</p>
+    <h1>Grabamos.<br /><em>Realizamos.</em><br />Entregamos.</h1>
+    <p class="hero-desc">Producción audiovisual integral para proyectos que publican con frecuencia. Multicámara, sonido profesional y realización en vivo — todo en una misma jornada, listo para publicar.</p>
+    <div class="hero-ctas">
+      <a href="../formulario.html"><button class="btn-primary">Solicitar propuesta →</button></a>
+      <a href="#planes"><button class="btn-outline">Ver planes</button></a>
+    </div>
+    <div class="hero-badges">
+      <span class="badge">3 Cámaras</span>
+      <span class="badge">8 Micrófonos</span>
+      <span class="badge">Grabación Multitrack</span>
+      <span class="badge">Realización en Vivo</span>
+      <span class="badge">Master 1080p H.264</span>
+      <span class="badge">Live Broadcast</span>
+    </div>
+  </div>
+</section>
+
+<!-- QUÉ INCLUYE -->
+<section id="incluye">
+  <div class="container">
+    <p class="label reveal">Qué incluye cada jornada</p>
+    <h2 class="section-title reveal">Una operación completa.<br /><em>Sin coordinar proveedores.</em></h2>
+    <div class="includes-grid">
+
+      <div class="include-card reveal">
+        <div class="include-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 10.5l4.72-4.72a.75.75 0 011.28.53v11.38a.75.75 0 01-1.28.53l-4.72-4.72M4.5 18.75h9a2.25 2.25 0 002.25-2.25v-9a2.25 2.25 0 00-2.25-2.25h-9A2.25 2.25 0 002.25 7.5v9a2.25 2.25 0 002.25 2.25z"/></svg>
+        </div>
+        <h3 class="include-title">Producción de Video</h3>
+        <ul class="include-list">
+          <li>Sony PXW-X70 (cámara principal)</li>
+          <li>GoPro HERO 10 Black</li>
+          <li>GoPro HERO 4</li>
+          <li>2 cámaras fijas + 1 operada</li>
+          <li>Realización multicámara en vivo</li>
+          <li>Grabación master en OBS</li>
+          <li>Entrega Full HD 1080p H.264</li>
+          <li>Archivos ISO de cada cámara</li>
+        </ul>
+      </div>
+
+      <div class="include-card reveal">
+        <div class="include-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M19.114 5.636a9 9 0 010 12.728M16.463 8.288a5.25 5.25 0 010 7.424M6.75 8.25l4.72-4.72a.75.75 0 011.28.53v15.88a.75.75 0 01-1.28.53l-4.72-4.72H4.51c-.88 0-1.704-.507-1.938-1.354A9.01 9.01 0 012.25 12c0-.83.112-1.633.322-2.396C2.806 8.756 3.63 8.25 4.51 8.25H6.75z"/></svg>
+        </div>
+        <h3 class="include-title">Producción de Sonido</h3>
+        <ul class="include-list">
+          <li>Técnico de sonido profesional</li>
+          <li>Consola Allen &amp; Heath SQ-5</li>
+          <li>Hasta 8 micrófonos simultáneos</li>
+          <li>Grabación multitrack</li>
+          <li>Integración SQ-5 con Pro Tools</li>
+          <li>Mezcla estéreo en vivo</li>
+          <li>Audio estéreo en master final</li>
+        </ul>
+      </div>
+
+      <div class="include-card reveal">
+        <div class="include-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 13.5l10.5-11.25L12 10.5h8.25L9.75 21.75 12 13.5H3.75z"/></svg>
+        </div>
+        <h3 class="include-title">Operación y Respaldo</h3>
+        <ul class="include-list">
+          <li>Montaje de video a cargo de Skyrock</li>
+          <li>Transporte de equipos incluido</li>
+          <li>Descarga y organización de archivos</li>
+          <li>Copia de seguridad de señal final</li>
+          <li>Backup de señal OBS</li>
+          <li>2 rondas de cambios incluidas</li>
+        </ul>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- JORNADA -->
+<section id="jornada">
+  <div class="container">
+    <div class="jornada-grid">
+      <div class="reveal">
+        <p class="label jornada-label">La jornada</p>
+        <p class="jornada-time">9 AM → 6 PM</p>
+        <p class="jornada-desc">Una jornada completa de producción. Dos pausas en la mañana, hora de almuerzo, dos pausas en la tarde. Diseñada para producir <strong style="color:#fff">hasta 2 episodios</strong> por jornada con máxima eficiencia técnica.</p>
+        <div class="jornada-stat">
+          <p class="jornada-stat-num">2</p>
+          <p class="jornada-stat-label">Episodios máximos por jornada</p>
+        </div>
+      </div>
+      <div class="reveal">
+        <p class="label jornada-label" style="margin-bottom:1rem">Estructura del día</p>
+        <ul class="timeline">
+          <li>
+            <span class="tl-time">9:00 AM</span>
+            <span class="tl-desc"><strong>Inicio de jornada</strong> — Montaje de equipos, prueba de sonido y video, configuración de set.</span>
+          </li>
+          <li>
+            <span class="tl-time">10:30 AM</span>
+            <span class="tl-desc"><strong>Pausa operativa</strong> — Revisión de material grabado y ajustes técnicos.</span>
+          </li>
+          <li>
+            <span class="tl-time">11:00 AM</span>
+            <span class="tl-desc"><strong>Producción episodio 1</strong> — Grabación, realización multicámara en vivo y mezcla de sonido.</span>
+          </li>
+          <li>
+            <span class="tl-time">1:00 PM</span>
+            <span class="tl-desc"><strong>Almuerzo</strong></span>
+          </li>
+          <li>
+            <span class="tl-time">2:00 PM</span>
+            <span class="tl-desc"><strong>Producción episodio 2</strong> — Segunda grabación, realización y ajustes de producción.</span>
+          </li>
+          <li>
+            <span class="tl-time">4:30 PM</span>
+            <span class="tl-desc"><strong>Pausa operativa</strong> — Revisión y descarga de material.</span>
+          </li>
+          <li>
+            <span class="tl-time">5:00 PM</span>
+            <span class="tl-desc"><strong>Cierre</strong> — Organización de archivos, backup y desmontaje.</span>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PLANES -->
+<section id="planes">
+  <div class="container">
+    <p class="label reveal">Planes de producción</p>
+    <h2 class="section-title reveal">Elige la frecuencia que<br /><em>necesita tu proyecto.</em></h2>
+    <div class="planes-grid">
+
+      <!-- SESSION -->
+      <div class="plan reveal">
+        <p class="plan-name">Session</p>
+        <h3 class="plan-title">4 episodios / mes</h3>
+        <p class="plan-tagline">Para proyectos que buscan establecer una frecuencia constante de publicación con operación audiovisual profesional.</p>
+        <div class="plan-price">
+          <p class="plan-price-amount">$5.700.000</p>
+          <p class="plan-price-period">COP · mensual</p>
+        </div>
+        <div class="plan-stats">
+          <div>
+            <p class="plan-stat-num">4</p>
+            <p class="plan-stat-label">Episodios</p>
+          </div>
+          <div>
+            <p class="plan-stat-num">2</p>
+            <p class="plan-stat-label">Jornadas</p>
+          </div>
+        </div>
+        <ul class="plan-list">
+          <li>Producción multicámara 3 cámaras</li>
+          <li>Hasta 8 micrófonos simultáneos</li>
+          <li>Técnico de sonido</li>
+          <li>Grabación multitrack</li>
+          <li>Realización multicámara en vivo</li>
+          <li>Master final 1080p H.264</li>
+          <li>Archivos ISO de cámara</li>
+          <li>Backup señal OBS</li>
+          <li>Organización de material</li>
+          <li>Transporte dentro de Bogotá</li>
+          <li>2 rondas de cambios</li>
+        </ul>
+        <a href="../formulario.html"><button class="plan-cta plan-cta-dark">Solicitar propuesta →</button></a>
+      </div>
+
+      <!-- SERIES -->
+      <div class="plan featured reveal">
+        <span class="plan-badge">Más solicitado</span>
+        <p class="plan-name">Series</p>
+        <h3 class="plan-title">8 episodios / mes</h3>
+        <p class="plan-tagline">Para proyectos que necesitan una producción recurrente con mayor capacidad de generación de contenido.</p>
+        <div class="plan-price">
+          <p class="plan-price-amount">$10.800.000</p>
+          <p class="plan-price-period">COP · mensual</p>
+        </div>
+        <div class="plan-stats">
+          <div>
+            <p class="plan-stat-num">8</p>
+            <p class="plan-stat-label">Episodios</p>
+          </div>
+          <div>
+            <p class="plan-stat-num">4</p>
+            <p class="plan-stat-label">Jornadas</p>
+          </div>
+        </div>
+        <ul class="plan-list">
+          <li>Todo lo de Session</li>
+          <li>Planeación mensual de producción</li>
+          <li>Estructuración de material por episodio</li>
+          <li>Organización de temporada</li>
+          <li>2 rondas de cambios</li>
+        </ul>
+        <a href="../formulario.html"><button class="plan-cta plan-cta-accent">Solicitar propuesta →</button></a>
+      </div>
+
+      <!-- BRAND -->
+      <div class="plan reveal">
+        <p class="plan-name">Brand</p>
+        <h3 class="plan-title">16 episodios / mes</h3>
+        <p class="plan-tagline">Para marcas, organizaciones y proyectos que necesitan generar contenido audiovisual de manera continua y escalable.</p>
+        <div class="plan-price">
+          <p class="plan-price-amount">$20.000.000</p>
+          <p class="plan-price-period">COP · mensual</p>
+        </div>
+        <div class="plan-stats">
+          <div>
+            <p class="plan-stat-num">16</p>
+            <p class="plan-stat-label">Episodios</p>
+          </div>
+          <div>
+            <p class="plan-stat-num">8</p>
+            <p class="plan-stat-label">Jornadas</p>
+          </div>
+        </div>
+        <ul class="plan-list">
+          <li>Todo lo de Series</li>
+          <li>Organización integral del material</li>
+          <li>Gestión de calendario de producción</li>
+          <li>Estructuración de archivos y entregables</li>
+          <li>2 rondas de cambios</li>
+        </ul>
+        <a href="../formulario.html"><button class="plan-cta plan-cta-dark">Solicitar propuesta →</button></a>
+      </div>
+
+    </div>
+
+    <!-- RESUMEN TABLE -->
+    <div class="reveal" style="overflow-x:auto; margin-top:3rem;">
+      <table class="resumen-table">
+        <thead>
+          <tr>
+            <th>Plan</th>
+            <th>Episodios / mes</th>
+            <th>Jornadas / mes</th>
+            <th>Inversión mensual</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>Session</td><td>4</td><td>2</td><td>$5.700.000 COP</td></tr>
+          <tr><td>Series</td><td>8</td><td>4</td><td>$10.800.000 COP</td></tr>
+          <tr><td>Brand</td><td>16</td><td>8</td><td>$20.000.000 COP</td></tr>
+        </tbody>
+      </table>
+      <p style="font-size:11px;color:var(--muted);margin-top:1rem;font-family:var(--mono);">* Valores en pesos colombianos (COP). La propuesta podrá ajustarse según características técnicas, duración, ubicación y requerimientos particulares del proyecto.</p>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICIOS ADICIONALES -->
+<section id="adicionales">
+  <div class="container">
+    <p class="label reveal">Servicios adicionales</p>
+    <h2 class="section-title reveal">Personaliza tu<br /><em>producción.</em></h2>
+    <div class="adicionales-grid">
+      <div class="adicional reveal">
+        <span class="adicional-emoji">🎨</span>
+        <h4 class="adicional-title">Corrección de Color</h4>
+        <p class="adicional-desc">Tratamiento o corrección adicional del material después de la producción.</p>
+      </div>
+      <div class="adicional reveal">
+        <span class="adicional-emoji">✨</span>
+        <h4 class="adicional-title">Diseño y Animación Gráfica</h4>
+        <p class="adicional-desc">Lower thirds, cortinillas, animaciones, gráficos personalizados e identidad visual animada.</p>
+      </div>
+      <div class="adicional reveal">
+        <span class="adicional-emoji">📱</span>
+        <h4 class="adicional-title">Adaptación para Redes Sociales</h4>
+        <p class="adicional-desc">Piezas verticales y formatos derivados del contenido principal para Instagram, TikTok y más.</p>
+      </div>
+      <div class="adicional reveal">
+        <span class="adicional-emoji">📝</span>
+        <h4 class="adicional-title">Transcripción</h4>
+        <p class="adicional-desc">Transcripción de jornadas de grabación y preparación del documento correspondiente.</p>
+      </div>
+      <div class="adicional reveal">
+        <span class="adicional-emoji">🎚️</span>
+        <h4 class="adicional-title">Edición y Mezcla de Audio Posterior</h4>
+        <p class="adicional-desc">Procesamiento adicional del multitrack cuando se requiera una mezcla diferente a la realizada en producción.</p>
+      </div>
+      <div class="adicional reveal">
+        <span class="adicional-emoji">🎥</span>
+        <h4 class="adicional-title">Entrega de Archivos ISO</h4>
+        <p class="adicional-desc">Entrega organizada de los archivos originales independientes de cada cámara.</p>
+      </div>
+      <div class="adicional reveal">
+        <span class="adicional-emoji">🎙️</span>
+        <h4 class="adicional-title">Entrega de Multitrack</h4>
+        <p class="adicional-desc">Entrega de sesiones o archivos de audio multicanal registrados durante la producción.</p>
+      </div>
+      <div class="adicional reveal">
+        <span class="adicional-emoji">✂️</span>
+        <h4 class="adicional-title">Edición Adicional</h4>
+        <p class="adicional-desc">Modificaciones o versiones que impliquen una intervención diferente a las dos rondas incluidas.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONDICIONES -->
+<section id="condiciones">
+  <div class="container">
+    <p class="label reveal">Condiciones de producción</p>
+    <h2 class="section-title reveal">Todo lo que necesitas<br /><em>saber antes de empezar.</em></h2>
+    <div class="condiciones-grid">
+      <div class="condicion highlight reveal">
+        <h4 class="condicion-title">Contratación mínima</h4>
+        <p class="condicion-desc">La unidad mínima es <strong>1 jornada de producción</strong> equivalente a hasta 2 episodios. Esto garantiza una operación técnica eficiente y cubre el mínimo de contratación con el proveedor de sonido.</p>
+      </div>
+      <div class="condicion reveal">
+        <h4 class="condicion-title">Rondas de cambios</h4>
+        <p class="condicion-desc">Cada episodio incluye <strong>hasta 2 rondas de cambios</strong>. Están destinadas a ajustes puntuales y no contemplan modificaciones estructurales, nuevas versiones completas ni regrabaciones.</p>
+      </div>
+      <div class="condicion reveal">
+        <h4 class="condicion-title">Almacenamiento y entrega</h4>
+        <p class="condicion-desc">El cliente suministra el disco duro para la entrega. Skyrock conserva una copia de trabajo temporal. <strong>Transcurridos 2 meses</strong> de la finalización, Skyrock no está obligado a conservar los archivos originales.</p>
+      </div>
+      <div class="condicion reveal">
+        <h4 class="condicion-title">Programación de jornadas</h4>
+        <p class="condicion-desc">Los planes mensuales requieren <strong>coordinación previa</strong>. Las fechas están sujetas a disponibilidad. Los episodios no utilizados no se acumulan automáticamente, salvo acuerdo previo entre las partes.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section id="cta">
+  <div class="container" style="text-align:center;">
+    <p class="label" style="color:var(--accent);text-align:center;">Siguiente paso</p>
+    <h2 class="section-title" style="color:#fff;">¿Listo para producir<br /><em style="color:var(--accent)">con frecuencia?</em></h2>
+    <p>Cuéntanos tu proyecto. Respondemos en menos de 24 horas con una propuesta ajustada a tus necesidades.</p>
+    <a href="../formulario.html"><button class="btn-primary">Solicitar propuesta →</button></a>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="footer-inner">
+    <picture><source srcset="../assets/logo-black.webp" type="image/webp" /><img src="../assets/logo-black.png" alt="Skyrock Studio" height="36" /></picture>
+    <p>© 2015 Skyrock Studio · Bogotá</p>
+    <a href="../index.html">Volver al sitio principal →</a>
+  </div>
+</footer>
+
+<script>
+  const els = document.querySelectorAll('.reveal');
+  const io = new IntersectionObserver(e => e.forEach(x => {
+    if(x.isIntersecting){ x.target.classList.add('on'); io.unobserve(x.target); }
+  }), { threshold: 0.07 });
+  els.forEach(el => io.observe(el));
+</script>
+</body>
+</html>
